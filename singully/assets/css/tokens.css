@@ -1,0 +1,124 @@
+/* ==========================================================================
+   Sinगली. Tokens.
+   Every value in docs/02-design-system.md lives here. Nothing else declares
+   a raw colour, size or easing. Fonts are loaded by a link tag in the page
+   head, never by an @import here.
+   ========================================================================== */
+
+:root {
+  /* ---- Colour -------------------------------------------------------- */
+  --ink: #2E2C2A;
+  --ink-2: #5F5B56;
+  --ink-3: #9A948C;
+  --bone: #F4F1EC;
+  --bone-2: #EAE5DD;
+  --bone-3: #DED8CE;
+  --line: currentColor;
+
+  /* Ground and figure for the current section. Flipped by [data-theme]. */
+  --ground: var(--bone);
+  --figure: var(--ink);
+  --figure-2: var(--ink-2);
+  --figure-3: var(--ink-3);
+  --ground-2: var(--bone-2);
+  --ground-3: var(--bone-3);
+
+  /* Placeholder art only. These three stand in for photography and must
+     never be used for interface chrome. */
+  --sand: #C8A97E;
+  --clay: #8B3A3A;
+  --indigo: #2B3A55;
+
+  /* ---- Type ---------------------------------------------------------- */
+  --font-display: "Rozha One", Georgia, "Noto Serif Devanagari", serif;
+  --font-body: "Mukta", "Helvetica Neue", Arial, "Noto Sans Devanagari", sans-serif;
+  --font-mono: "IBM Plex Mono", "SF Mono", Menlo, monospace;
+
+  /* Fluid scale. Interpolates linearly from a 390px to a 1440px viewport. */
+  --t-hero: clamp(3.5rem, 1.271rem + 9.143vw, 9.5rem);
+  --t-1: clamp(2.5rem, 1.2rem + 5.333vw, 6rem);
+  --t-2: clamp(1.75rem, 1.1rem + 2.667vw, 3.5rem);
+  --t-3: clamp(1.375rem, 1.143rem + 0.952vw, 2rem);
+  --t-body: clamp(1rem, 0.93rem + 0.286vw, 1.1875rem);
+  --t-small: clamp(0.8125rem, 0.789rem + 0.095vw, 0.875rem);
+  --t-mono: clamp(0.6875rem, 0.664rem + 0.095vw, 0.75rem);
+
+  --lh-hero: 0.92;
+  --lh-1: 0.98;
+  --lh-2: 1.05;
+  --lh-3: 1.2;
+  --lh-body: 1.55;
+  --lh-small: 1.5;
+  --lh-mono: 1.4;
+
+  --tr-hero: -0.02em;
+  --tr-1: -0.015em;
+  --tr-2: -0.01em;
+  --tr-3: 0em;
+  --tr-body: 0em;
+  --tr-small: 0em;
+  --tr-mono: 0.08em;
+
+  /* The gap that lets the शिरोरेखा of ग read as the cap line of Sin. */
+  --wordmark-tracking: -0.03em;
+
+  /* ---- Space --------------------------------------------------------- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 16px;
+  --s-4: 24px;
+  --s-5: 40px;
+  --s-6: 64px;
+  --s-7: 104px;
+  --s-8: 168px;
+
+  /* Section vertical rhythm. --s-7 on mobile, --s-8 from 1080px up. */
+  --section-y: var(--s-7);
+
+  /* ---- Grid and measure ---------------------------------------------- */
+  --grid-cols: 12;
+  --gutter: var(--s-4);
+  --pad: clamp(20px, 4vw, 64px);
+  --max-w: 1600px;
+  --measure: 34em;
+
+  /* ---- Lines, radii, borders ----------------------------------------- */
+  --radius: 0;
+  --rule: 1px;
+  --rule-strong: 1.5px;
+  --border: var(--rule) solid var(--line);
+  /* शिरोरेखा weight. 1px on mobile, 1.5px from 1080px, 2px in the footer. */
+  --shiro-w: 1px;
+  --shiro-w-footer: 2px;
+
+  /* ---- Motion -------------------------------------------------------- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --d-micro: 0.3s;
+  --d-reveal: 0.9s;
+  --d-curtain: 1.1s;
+  --d-preloader: 1.6s;
+  --d-transition: 0.6s;
+
+  /* ---- Chrome -------------------------------------------------------- */
+  --header-h: 64px;
+  --cursor-dot: 12px;
+  --cursor-ring: 72px;
+  --marquee-duration: 60s;
+
+  /* ---- Layers -------------------------------------------------------- */
+  --z-media: 1;
+  --z-sticky: 20;
+  --z-header: 40;
+  --z-cursor: 80;
+  --z-transition: 90;
+  --z-preloader: 100;
+}
+
+@media (min-width: 1080px) {
+  :root {
+    --section-y: var(--s-8);
+    --shiro-w: 1.5px;
+  }
+}

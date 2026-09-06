@@ -1,0 +1,956 @@
+/* ==========================================================================
+   Sinगली. Components.
+   Mobile first. Breakpoints at 720px and 1080px. Radius 0. No shadows.
+   Every border is 1px currentColor at full opacity.
+   ========================================================================== */
+
+/* ==========================================================================
+   शिरोरेखा
+   The one graphic the brand owns. A straight, full width line that things
+   hang from. Never curved, dotted, shortened or floated.
+   ========================================================================== */
+
+.shirorekha {
+  display: block;
+  width: 100%;
+  height: var(--shiro-w);
+  background: currentColor;
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.shirorekha--draw {
+  /* Initial scaleX(0) is set under html.js in base.css so a page without
+     scripting still shows the line. */
+  transition: none;
+}
+
+.shirorekha--footer {
+  height: var(--shiro-w-footer);
+}
+
+/* ==========================================================================
+   Header
+   Fixed, bone, 64px. Wordmark left, nav centre, bag right, शिरोरेखा under.
+   ========================================================================== */
+
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: var(--z-header);
+  height: var(--header-h);
+  background: var(--bone);
+  color: var(--ink);
+  will-change: transform;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  height: var(--header-h);
+}
+
+.header__rule {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.header.is-hidden {
+  /* Applied by M10. GSAP owns the transform, this is the no-JS fallback. */
+  transform: translateY(-100%);
+}
+
+.header__brand {
+  display: inline-flex;
+  align-items: center;
+  font-size: 24px;
+  line-height: 1;
+  flex: 0 0 auto;
+}
+
+@media (min-width: 1080px) {
+  .header__brand {
+    font-size: 28px;
+  }
+}
+
+.header__bag {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+}
+
+/* Blend variant. Use on pages whose hero is a dark section: the header ground
+   drops away and the chrome inverts itself against whatever scrolls under. */
+.header--blend {
+  background: transparent;
+}
+
+.header--blend .header__brand,
+.header--blend .nav,
+.header--blend .header__bag,
+.header--blend .header__rule {
+  mix-blend-mode: difference;
+  color: var(--bone);
+}
+
+/* ==========================================================================
+   Nav
+   ========================================================================== */
+
+.nav__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 44px;
+  padding-inline: 0;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+}
+
+.nav__list {
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+}
+
+.nav__link {
+  position: relative;
+  display: inline-block;
+  padding-block: var(--s-1);
+  font-family: var(--font-body);
+  font-size: var(--t-small);
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--rule);
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--d-micro) var(--ease-out);
+}
+
+.nav__link:hover::after,
+.nav__link:focus-visible::after,
+.nav__link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+/* Mobile: the nav is a full height panel behind the header. */
+@media (max-width: 1079px) {
+  .nav {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    padding: calc(var(--header-h) + var(--s-6)) var(--pad) var(--s-6);
+    background: var(--bone);
+    color: var(--ink);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity var(--d-micro) var(--ease-out),
+      visibility 0s linear var(--d-micro);
+  }
+
+  .nav.is-open {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+  }
+
+  .nav__list {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s-4);
+  }
+
+  .nav__link {
+    font-family: var(--font-display);
+    font-size: var(--t-2);
+    line-height: var(--lh-2);
+    letter-spacing: var(--tr-2);
+  }
+}
+
+@media (min-width: 1080px) {
+  .nav__toggle {
+    display: none;
+  }
+
+  .nav {
+    flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   Chapter
+   Numbered section with a sticky mono label. Left margin on desktop,
+   above the content on mobile.
+   ========================================================================== */
+
+.chapter {
+  position: relative;
+  padding-block: var(--section-y);
+}
+
+.chapter__label {
+  position: sticky;
+  top: calc(var(--header-h) + var(--s-4));
+  z-index: var(--z-sticky);
+  display: block;
+  margin-bottom: var(--s-5);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  line-height: var(--lh-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-2);
+}
+
+.chapter__label .shirorekha {
+  margin-bottom: var(--s-2);
+  color: var(--figure);
+}
+
+.chapter__body {
+  min-width: 0;
+}
+
+.chapter__divider {
+  color: var(--figure);
+  opacity: 0.4;
+}
+
+@media (min-width: 1080px) {
+  .chapter__inner {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+    gap: var(--gutter);
+  }
+
+  .chapter__label {
+    grid-column: 1 / span 2;
+    margin-bottom: 0;
+    align-self: start;
+  }
+
+  .chapter__body {
+    grid-column: 3 / -1;
+  }
+
+  .chapter--wide .chapter__body {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ==========================================================================
+   Media frame
+   Aspect locked, ink curtain over it, image resting at 1.08 for parallax.
+   ========================================================================== */
+
+.media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--media-ratio, 4 / 5);
+  background: var(--bone-3);
+  isolation: isolate;
+}
+
+.media img,
+.media picture,
+.media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.08);
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* The ink curtain. Sits over the frame and wipes upward to reveal. */
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--ink);
+  transform: translateY(0);
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* Frames that are not on a reveal trigger are open from the start. */
+.media:not([data-reveal])::after {
+  transform: translateY(-101%);
+}
+
+.media--16x9 { --media-ratio: 16 / 9; }
+.media--3x2 { --media-ratio: 3 / 2; }
+.media--4x5 { --media-ratio: 4 / 5; }
+.media--3x4 { --media-ratio: 3 / 4; }
+.media--1x1 { --media-ratio: 1 / 1; }
+
+.media__caption {
+  margin-top: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-2);
+}
+
+/* ==========================================================================
+   Hold frame
+   Press and hold a garment to see the hands that made it.
+   ========================================================================== */
+
+.hold {
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: left;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hold__frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: var(--media-ratio, 4 / 5);
+  background: var(--bone-3);
+}
+
+.hold__back,
+.hold__front {
+  position: absolute;
+  inset: 0;
+}
+
+.hold__back {
+  z-index: 1;
+}
+
+.hold__back img {
+  transform: scale(1.06);
+}
+
+.hold__front {
+  z-index: 2;
+  /* The front layer is clipped away from the bottom as the hold progresses. */
+  clip-path: inset(0 0 0% 0);
+  will-change: clip-path;
+}
+
+.hold__front .media::after,
+.hold__back .media::after {
+  z-index: 3;
+}
+
+.hold__label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin-top: var(--s-3);
+  padding-top: var(--s-2);
+  border-top: var(--border);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  line-height: var(--lh-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-2);
+}
+
+.hold__label-text {
+  min-height: 1.4em;
+}
+
+.hold__progress {
+  font-variant-numeric: tabular-nums;
+  color: var(--figure-3);
+}
+
+.hold.is-held .hold__label {
+  color: var(--figure);
+}
+
+/* ==========================================================================
+   Lanes
+   A row of places. The hovered card expands, the rest compress.
+   ========================================================================== */
+
+.lanes {
+  display: flex;
+  gap: var(--s-3);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: var(--s-2);
+}
+
+.lanes::-webkit-scrollbar {
+  display: none;
+}
+
+.lane {
+  flex: 0 0 72%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  min-width: 0;
+  padding-top: var(--s-3);
+  border-top: var(--border);
+  will-change: flex-grow;
+}
+
+.lane__media {
+  --media-ratio: 3 / 4;
+}
+
+.lane__place {
+  font-family: var(--font-display);
+  font-size: var(--t-3);
+  line-height: var(--lh-3);
+}
+
+.lane__craft {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-2);
+}
+
+.lane__maker {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-3);
+}
+
+@media (min-width: 1080px) {
+  .lanes {
+    overflow: visible;
+    scroll-snap-type: none;
+    gap: var(--s-4);
+  }
+
+  .lane {
+    /* GSAP drives flex-grow on hover. These are the rest values. */
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .lane__craft,
+  .lane__maker {
+    opacity: 0;
+    transition: opacity var(--d-micro) var(--ease-out);
+  }
+
+  .lane.is-active .lane__craft,
+  .lane.is-active .lane__maker,
+  .lane:focus-within .lane__craft,
+  .lane:focus-within .lane__maker {
+    opacity: 1;
+  }
+
+  .lanes:hover .lane:not(.is-active) .lane__place {
+    color: var(--figure-2);
+  }
+}
+
+/* ==========================================================================
+   Piece card
+   Edition item. No badges, no sale tags, ever.
+   ========================================================================== */
+
+.piece {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  min-width: 0;
+  padding-top: var(--s-3);
+  border-top: var(--border);
+}
+
+.piece__media {
+  --media-ratio: 4 / 5;
+  margin-bottom: var(--s-2);
+}
+
+.piece__name {
+  font-family: var(--font-display);
+  font-size: var(--t-3);
+  line-height: var(--lh-3);
+}
+
+.piece__credit,
+.piece__edition {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  line-height: var(--lh-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-2);
+}
+
+.piece__edition {
+  color: var(--figure-3);
+}
+
+.piece__price {
+  font-family: var(--font-display);
+  font-size: var(--t-3);
+  line-height: 1;
+  margin-top: var(--s-1);
+}
+
+/* The horizontal scrubbed row of M7. Native snap scroll under 1080px. */
+.pieces {
+  display: flex;
+  gap: var(--s-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.pieces::-webkit-scrollbar {
+  display: none;
+}
+
+.pieces > .piece {
+  flex: 0 0 78%;
+  scroll-snap-align: start;
+}
+
+@media (min-width: 720px) {
+  .pieces > .piece {
+    flex-basis: 42%;
+  }
+}
+
+@media (min-width: 1080px) {
+  .pieces {
+    overflow: visible;
+    scroll-snap-type: none;
+    gap: var(--s-5);
+    will-change: transform;
+  }
+
+  .pieces > .piece {
+    flex: 0 0 clamp(280px, 24vw, 400px);
+  }
+}
+
+/* ==========================================================================
+   Buttons
+   Text plus a शिरोरेखा that draws on hover. 48px minimum.
+   ========================================================================== */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: 48px;
+  padding: var(--s-2) 0;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: 1.2;
+  color: inherit;
+  background: none;
+  text-align: center;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--s-2);
+  height: var(--rule);
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--d-micro) var(--ease-out);
+}
+
+.btn:hover::after,
+.btn:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.btn--primary {
+  padding-inline: var(--s-4);
+  border: var(--border);
+  background: var(--figure);
+  color: var(--ground);
+  transition: background var(--d-micro) var(--ease-out),
+    color var(--d-micro) var(--ease-out);
+}
+
+.btn--primary::after {
+  display: none;
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  background: transparent;
+  color: var(--figure);
+}
+
+.btn--block {
+  display: flex;
+  width: 100%;
+}
+
+.btn[disabled],
+.btn[aria-disabled="true"] {
+  color: var(--figure-3);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Marquee
+   One slow line of places and crafts. Pauses on hover.
+   ========================================================================== */
+
+.marquee {
+  overflow: hidden;
+  width: 100%;
+  padding-block: var(--s-3);
+  border-top: var(--border);
+  border-bottom: var(--border);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: sin-marquee var(--marquee-duration) linear infinite;
+}
+
+.marquee:hover .marquee__track,
+.marquee:focus-within .marquee__track {
+  animation-play-state: paused;
+}
+
+.marquee__group {
+  display: flex;
+  flex: 0 0 auto;
+  gap: var(--s-5);
+  padding-right: var(--s-5);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  line-height: var(--lh-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@keyframes sin-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+/* ==========================================================================
+   Footer
+   Ink ground. The largest शिरोरेखा on the site, with Sinगली hanging from it.
+   ========================================================================== */
+
+.footer {
+  background: var(--ground);
+  color: var(--figure);
+  padding-top: var(--s-6);
+  padding-bottom: var(--s-5);
+  overflow: hidden;
+}
+
+.footer__rule {
+  margin-bottom: var(--s-3);
+}
+
+.footer__wordmark {
+  display: block;
+  overflow: hidden;
+  margin-bottom: var(--s-6);
+}
+
+.footer__wordmark span {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-synthesis: none;
+  letter-spacing: var(--wordmark-tracking);
+  line-height: 0.86;
+  /* Runs the full page width, hanging from the super rule. */
+  font-size: clamp(4rem, 21vw, 20rem);
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.footer__cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-5) var(--gutter);
+  margin-bottom: var(--s-6);
+}
+
+.footer__col h2,
+.footer__col-title {
+  margin-bottom: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-3);
+}
+
+.footer__col li + li {
+  margin-top: var(--s-2);
+}
+
+.footer__col a {
+  position: relative;
+  display: inline-block;
+  font-size: var(--t-small);
+}
+
+.footer__col a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: var(--rule);
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--d-micro) var(--ease-out);
+}
+
+.footer__col a:hover::after,
+.footer__col a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.footer__legal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding-top: var(--s-3);
+  border-top: var(--border);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  line-height: var(--lh-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-3);
+}
+
+@media (min-width: 720px) {
+  .footer__cols {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .footer__legal {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+}
+
+/* ==========================================================================
+   Cursor
+   12px dot, grows to a 72px ring with a mono label over [data-cursor].
+   Pointer devices only.
+   ========================================================================== */
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-cursor);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--cursor-dot);
+  height: var(--cursor-dot);
+  margin: calc(var(--cursor-dot) / -2) 0 0 calc(var(--cursor-dot) / -2);
+  border-radius: 50%;
+  background: var(--bone);
+  pointer-events: none;
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cursor {
+    display: flex;
+  }
+}
+
+.cursor.is-ring {
+  background: transparent;
+  border: 1px solid var(--bone);
+}
+
+.cursor__label {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--bone);
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Page transition curtain
+   Rises from the bottom before navigation, lifts away on arrival.
+   ========================================================================== */
+
+.transition {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-transition);
+  background: var(--ink);
+  transform: translateY(100%);
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Present at load so the arriving page lifts it away. */
+html.js .transition {
+  transform: translateY(0);
+}
+
+html.js.sin-skip-intro .transition {
+  transform: translateY(100%);
+}
+
+/* ==========================================================================
+   Preloader
+   The शिरोरेखा draws, the wordmark drops from it, both rise into the header.
+   ========================================================================== */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-preloader);
+  display: none;
+  background: var(--bone);
+  color: var(--ink);
+}
+
+html.js:not(.sin-skip-intro) .preloader {
+  display: block;
+}
+
+.preloader__stage {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  padding-inline: var(--pad);
+  transform: translateY(-50%);
+  will-change: transform;
+}
+
+.preloader__rule {
+  height: var(--rule-strong);
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.preloader__mark {
+  display: block;
+  margin-top: var(--s-2);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-synthesis: none;
+  letter-spacing: var(--wordmark-tracking);
+  line-height: 1;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.preloader.is-done {
+  display: none;
+}
+
+/* ==========================================================================
+   Line splitter
+   motion.js wraps each visual line of [data-reveal="lines"] in a mask.
+   ========================================================================== */
+
+.sin-line {
+  display: block;
+  overflow: hidden;
+}
+
+.sin-line__inner {
+  display: block;
+  will-change: transform;
+}
+
+/* ==========================================================================
+   The House diagram
+   ========================================================================== */
+
+.house-bar {
+  transform-origin: left center;
+  will-change: transform;
+}
+
+.house-figure {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   Section helpers
+   ========================================================================== */
+
+.band {
+  background: var(--ground);
+  color: var(--figure);
+}
+
+.pin-spacer,
+.pin {
+  min-width: 0;
+}
