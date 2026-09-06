@@ -24,6 +24,10 @@ html {
 }
 
 body {
+  /* A column so a short page still puts the footer at the bottom instead of
+     leaving a band of bone under an ink ground. */
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
   background: var(--ground);
   color: var(--figure);
@@ -169,6 +173,10 @@ html.lenis body {
   }
 }
 
+main {
+  flex: 1 0 auto;
+}
+
 .section {
   padding-block: var(--section-y);
 }
@@ -290,8 +298,8 @@ html.motion-off .shirorekha--draw {
   transform: none !important;
 }
 
-html.motion-off .media::after {
-  transform: translateY(-101%) !important;
+html.motion-off .media {
+  --curtain-y: -101% !important;
 }
 
 html.motion-off .preloader {
@@ -300,6 +308,7 @@ html.motion-off .preloader {
 
 html.motion-off .transition {
   transform: translateY(100%) !important;
+  visibility: hidden !important;
 }
 
 /* ---- Utility ----------------------------------------------------------- */
@@ -395,8 +404,8 @@ html.motion-off .transition {
     transform: none !important;
   }
 
-  .media::after {
-    transform: translateY(-101%) !important;
+  .media {
+    --curtain-y: -101% !important;
   }
 
   .media img {
@@ -414,6 +423,7 @@ html.motion-off .transition {
 
   .transition {
     transform: translateY(100%) !important;
+    visibility: hidden !important;
   }
 
   .marquee__track {

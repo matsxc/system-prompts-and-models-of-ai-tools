@@ -1,4 +1,15 @@
 {
+  "name": "singully",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Sinगली. Static brand site. HTML, CSS, vanilla JS, GSAP and Lenis vendored.",
+  "scripts": {
+    "placeholders": "node scripts/generate-placeholders.mjs",
+    "serve": "node scripts/serve.mjs",
+    "qa": "node scripts/qa.mjs",
+    "artifact": "node scripts/build-artifact.mjs"
+  },
   "devDependencies": {
     "playwright": "^1.47.2"
   }

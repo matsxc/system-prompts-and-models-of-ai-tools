@@ -265,6 +265,9 @@
    ========================================================================== */
 
 .media {
+  --curtain-y: 0%;
+  /* Declared block so the frame keeps its ratio on a span or a figure. */
+  display: block;
   position: relative;
   overflow: hidden;
   aspect-ratio: var(--media-ratio, 4 / 5);
@@ -290,14 +293,15 @@
   inset: 0;
   z-index: 2;
   background: var(--ink);
-  transform: translateY(0);
+  /* GSAP tweens the custom property, so the curtain stays a pseudo element. */
+  transform: translateY(var(--curtain-y));
   will-change: transform;
   pointer-events: none;
 }
 
 /* Frames that are not on a reveal trigger are open from the start. */
-.media:not([data-reveal])::after {
-  transform: translateY(-101%);
+.media:not([data-reveal]) {
+  --curtain-y: -101%;
 }
 
 .media--16x9 { --media-ratio: 16 / 9; }
@@ -323,6 +327,7 @@
 .hold {
   position: relative;
   display: block;
+  padding: 0;
   width: 100%;
   text-align: left;
   touch-action: pan-y;
@@ -332,6 +337,7 @@
 }
 
 .hold__frame {
+  display: block;
   position: relative;
   overflow: hidden;
   aspect-ratio: var(--media-ratio, 4 / 5);
@@ -340,8 +346,17 @@
 
 .hold__back,
 .hold__front {
+  display: block;
   position: absolute;
   inset: 0;
+}
+
+/* Both layers fill the frame, so the frame alone owns the ratio. */
+.hold__back .media,
+.hold__front .media {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
 }
 
 .hold__back {
@@ -697,21 +712,26 @@
   margin-bottom: var(--s-3);
 }
 
+/* The mask exists for the M11 slide up. It carries the type size itself so
+   the padding that buys back the descender is measured in display ems, not
+   in body ems. */
 .footer__wordmark {
   display: block;
   overflow: hidden;
-  margin-bottom: var(--s-6);
+  font-family: var(--font-display);
+  /* Runs the full page width, hanging from the super rule. */
+  font-size: clamp(4rem, 21vw, 20rem);
+  line-height: 0.86;
+  padding-bottom: 0.24em;
+  margin-bottom: calc(var(--s-6) - 0.24em);
 }
 
-.footer__wordmark span {
+.footer__wordmark > span {
   display: block;
-  font-family: var(--font-display);
+  font: inherit;
   font-weight: 400;
   font-synthesis: none;
   letter-spacing: var(--wordmark-tracking);
-  line-height: 0.86;
-  /* Runs the full page width, hanging from the super rule. */
-  font-size: clamp(4rem, 21vw, 20rem);
   white-space: nowrap;
   will-change: transform;
 }
@@ -730,7 +750,7 @@
   font-size: var(--t-mono);
   letter-spacing: var(--tr-mono);
   text-transform: uppercase;
-  color: var(--figure-3);
+  color: var(--figure-2);
 }
 
 .footer__col li + li {
@@ -772,7 +792,7 @@
   line-height: var(--lh-mono);
   letter-spacing: var(--tr-mono);
   text-transform: uppercase;
-  color: var(--figure-3);
+  color: var(--figure-2);
 }
 
 @media (min-width: 720px) {
@@ -844,6 +864,7 @@
   z-index: var(--z-transition);
   background: var(--ink);
   transform: translateY(100%);
+  visibility: hidden;
   pointer-events: none;
   will-change: transform;
 }
@@ -851,10 +872,12 @@
 /* Present at load so the arriving page lifts it away. */
 html.js .transition {
   transform: translateY(0);
+  visibility: visible;
 }
 
 html.js.sin-skip-intro .transition {
   transform: translateY(100%);
+  visibility: hidden;
 }
 
 /* ==========================================================================
@@ -886,6 +909,7 @@ html.js:not(.sin-skip-intro) .preloader {
 }
 
 .preloader__rule {
+  display: block;
   height: var(--rule-strong);
   background: currentColor;
   transform: scaleX(0);
@@ -918,6 +942,9 @@ html.js:not(.sin-skip-intro) .preloader {
 .sin-line {
   display: block;
   overflow: hidden;
+  /* Buys back the descender that overflow: hidden would clip. */
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
 }
 
 .sin-line__inner {
@@ -944,6 +971,12 @@ html.js:not(.sin-skip-intro) .preloader {
 /* ==========================================================================
    Section helpers
    ========================================================================== */
+
+/* Clears the fixed header. Drop it when the first section is a full bleed
+   hero the header is meant to sit over. */
+.page {
+  padding-top: var(--header-h);
+}
 
 .band {
   background: var(--ground);

@@ -1,0 +1,40 @@
+<!--
+  Sinगली. Header.
+  Paste inside <body>, directly after the transition curtain and before <main>.
+
+  Behaviour comes from site.js and M10 in motion.js. Nothing here needs
+  editing per page except aria-current on the nav link for the current page.
+
+  Add the class header--blend when the page opens on a dark section and the
+  chrome should invert itself against what scrolls under it.
+-->
+<header class="header" data-header>
+  <div class="container header__inner">
+    <a class="header__brand wordmark" href="/index.html" aria-label="Sinगली, home">Sin<span>गली</span></a>
+
+    <button
+      class="nav__toggle"
+      type="button"
+      data-nav-toggle
+      aria-controls="sin-nav"
+      aria-expanded="false"
+    >
+      <span data-nav-toggle-label>Menu</span>
+    </button>
+
+    <nav class="nav" id="sin-nav" data-nav aria-label="Primary">
+      <ul class="nav__list">
+        <li><a class="nav__link" href="/drop.html">The Drop</a></li>
+        <li><a class="nav__link" href="/artisans.html">The Hands</a></li>
+        <li><a class="nav__link" href="/house.html">The House</a></li>
+        <li><a class="nav__link" href="/journal.html">Journal</a></li>
+      </ul>
+    </nav>
+
+    <button class="header__bag" type="button" data-bag-label data-cursor="open">
+      Bag (<span data-bag-count>0</span>)
+    </button>
+  </div>
+
+  <span class="shirorekha header__rule" aria-hidden="true"></span>
+</header>
