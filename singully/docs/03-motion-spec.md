@@ -44,8 +44,8 @@ Library: GSAP 3.12 core + ScrollTrigger, Lenis for smooth scroll. All in `assets
 - Desktop: the section pins for `(trackWidth - viewportWidth)` pixels and the piece row translates X with scrub 0.6. The chapter label stays. Mobile: native horizontal scroll with snap, no pin.
 - Each piece card's media reveals with the M4 curtain as it enters the viewport.
 
-### M8 The House diagram
-- An SVG showing one ₹ note split into artisan share, materials, making, house. Bars draw from left with `scaleX`, stagger 0.15s, and mono figures count up with `snap: 1` over 1.2s once in view.
+### M8 The Tag diagram
+- An inline SVG of a woven tag (rectangle, stitched border as a dashed 1px path, the wordmark, a maker name line, a piece number, a small mark). Four callout lines draw from the tag to mono labels using stroke-dashoffset, stagger 0.15s, 0.8s each, then labels fade in. Triggered once at `top 70%`. No numbers, no money.
 
 ### M9 Cursor
 - 12px ink dot follows the pointer with `lerp 0.18`. Over `[data-cursor]` it grows to a 72px ring with a mono label from the attribute (`hold`, `open`, `enter`). Hidden on touch devices and when `prefers-reduced-motion`.
