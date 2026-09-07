@@ -1020,12 +1020,6 @@ html.js [data-hero-reveal] {
   display: block;
 }
 
-/* The name is never romanised and never recased, so it opts out of the
-   uppercase that mono lines otherwise carry. */
-.nocaps {
-  text-transform: none;
-}
-
 html.motion-off [data-hero-reveal] {
   opacity: 1 !important;
   transform: none !important;
@@ -1731,4 +1725,14 @@ html.motion-off .prologue__line {
   .chapter__grid--tail {
     margin-top: var(--s-7);
   }
+}
+
+/* ==========================================================================
+   The name
+   Never romanised, never recased. Last in the file so it stands down any
+   uppercase a mono context has already asked for.
+   ========================================================================== */
+
+.nocaps {
+  text-transform: none;
 }

@@ -31,7 +31,7 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, "..");
 const QA = join(ROOT, "qa");
 const PORT = Number(process.env.PORT || 4173);
-const WIDTHS = [390, 1024, 1440];
+const WIDTHS = process.env.WIDTHS ? process.env.WIDTHS.split(",").map(Number) : [390, 1024, 1440];
 const SETTLE_MS = 2500;
 
 /* ---- Web fonts ----------------------------------------------------------
@@ -288,8 +288,37 @@ async function run() {
         // Let the preloader finish and the arrival curtain lift.
         await tab.waitForTimeout(SETTLE_MS);
 
+        // Walk the page so every scroll bound reveal has played, then return
+        // to the top so pinned chapters settle before the full page capture.
+        await tab.evaluate(async () => {
+          const step = Math.round(window.innerHeight * 0.4);
+          const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+          const total = () => document.documentElement.scrollHeight;
+          for (let y = 0; y < total(); y += step) {
+            window.scrollTo(0, y);
+            await sleep(70);
+          }
+          window.scrollTo(0, total());
+          await sleep(400);
+          window.scrollTo(0, 0);
+          await sleep(500);
+        });
+
         const out = join(QA, `${name}-${width}.png`);
         await tab.screenshot({ path: out, fullPage: true });
+
+        // FRAMES=1 also writes viewport frames every 90vh, which is how a
+        // visitor actually sees pinned chapters and mid scroll states.
+        if (process.env.FRAMES) {
+          const total = await tab.evaluate(() => document.documentElement.scrollHeight);
+          const vh = await tab.evaluate(() => window.innerHeight);
+          let i = 0;
+          for (let y = 0; y < total; y += Math.round(vh * 0.9)) {
+            await tab.evaluate((yy) => window.scrollTo(0, yy), y);
+            await tab.waitForTimeout(650);
+            await tab.screenshot({ path: join(QA, `${name}-${width}-f${String(i++).padStart(2, "0")}.png`) });
+          }
+        }
 
         if (errors.length) {
           failures += errors.length;

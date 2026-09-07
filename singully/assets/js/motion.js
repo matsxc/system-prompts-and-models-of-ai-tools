@@ -1161,11 +1161,23 @@
         var down = y > last;
         last = y;
 
-        if (down && y > threshold && !hidden) {
+        // Below the threshold the header is always shown, no matter how it
+        // got there: a scroll up, a jump to the top (scrollTo, an anchor
+        // link, a browser scroll restore) all count.
+        if (y < threshold) {
+          if (hidden) {
+            hidden = false;
+            header.classList.remove("is-hidden");
+            gsap.to(header, { yPercent: 0, duration: 0.4, ease: "power2.inOut" });
+          }
+          return;
+        }
+
+        if (down && !hidden) {
           hidden = true;
           header.classList.add("is-hidden");
           gsap.to(header, { yPercent: -100, duration: 0.4, ease: "power2.inOut" });
-        } else if ((!down || y <= threshold) && hidden) {
+        } else if (!down && hidden) {
           hidden = false;
           header.classList.remove("is-hidden");
           gsap.to(header, { yPercent: 0, duration: 0.4, ease: "power2.inOut" });

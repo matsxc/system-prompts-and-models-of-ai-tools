@@ -145,6 +145,21 @@ mkdirSync(DIST, { recursive: true });
 
 const name = basename(pagePath, ".html").replace(/^[._]+/, "") || "page";
 const out = join(DIST, `${name}-preview.html`);
+// FRAGMENT=1 writes an Artifact ready fragment: the host wraps it in its own
+// doctype, html, head and body, so only title, fonts, styles, scripts and the
+// body content survive, with the title first so the host can find it.
+if (process.env.FRAGMENT) {
+  const head = (html.match(/<head\b[^>]*>([\s\S]*?)<\/head>/i) || ["", ""])[1];
+  const body = (html.match(/<body\b[^>]*>([\s\S]*?)<\/body>/i) || ["", html])[1];
+  const title = (head.match(/<title>[\s\S]*?<\/title>/i) || ["<title>Sinगली</title>"])[0];
+  const keep = head
+    .replace(/<title>[\s\S]*?<\/title>/i, "")
+    .replace(/<meta\b[^>]*>/gi, "")
+    .replace(/<link\b[^>]*rel=["']icon["'][^>]*>/gi, "")
+    .replace(/<!--[\s\S]*?-->/g, "");
+  html = `${title}\n${keep}\n${body}`;
+}
+
 writeFileSync(out, html, "utf8");
 
 const kb = (Buffer.byteLength(html) / 1024).toFixed(1);
