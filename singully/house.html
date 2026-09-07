@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The House. Sinगली</title>
+    <meta
+      name="description"
+      content="The House. Sinगली. Pieces made in small numbered drops by makers named on the tag."
+    />
+    <meta name="theme-color" content="#F4F1EC" />
+
+    <!-- The शिरोरेखा, at 32px. Inline so the page never asks for a file. -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F4F1EC'/%3E%3Crect x='5' y='12' width='22' height='2.5' fill='%232E2C2A'/%3E%3C/svg%3E" />
+
+    <!-- One font request. Rozha One display, Mukta body, IBM Plex Mono credits. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Mukta:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
+
+    <link rel="stylesheet" href="assets/css/tokens.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/pages.css" />
+
+    <!--
+      Runs before first paint. Marks that scripting is present, so nothing
+      starts hidden on a page that cannot animate, and decides whether this
+      visit gets the preloader at all.
+    -->
+    <script>
+      (function (d, w) {
+        var h = d.documentElement;
+        h.classList.add("js");
+        var skip = false;
+        try {
+          skip = w.sessionStorage.getItem("sin_seen") === "1";
+        } catch (e) {
+          skip = false;
+        }
+        if (
+          w.matchMedia &&
+          w.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ) {
+          skip = true;
+        }
+        if (skip) h.classList.add("sin-skip-intro");
+      })(document, window);
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- M1. The शिरोरेखा draws, the wordmark drops from it, both rise into
+         the header. Removed from the document when the sequence ends. -->
+    <div class="preloader" data-preloader aria-hidden="true">
+      <div class="preloader__stage">
+        <span class="preloader__rule"></span>
+        <span class="preloader__mark wordmark">Sin<span>गली</span></span>
+      </div>
+    </div>
+
+    <!-- M12. Present at load, lifted once fonts are ready. -->
+    <div class="transition" data-transition aria-hidden="true"></div>
+
+    <header class="header" data-header>
+      <div class="container header__inner">
+        <a class="header__brand wordmark" href="index.html" aria-label="Sinगली, home">Sin<span>गली</span></a>
+
+        <button
+          class="nav__toggle"
+          type="button"
+          data-nav-toggle
+          aria-controls="sin-nav"
+          aria-expanded="false"
+        >
+          <span data-nav-toggle-label>Menu</span>
+        </button>
+
+        <nav class="nav" id="sin-nav" data-nav aria-label="Primary">
+          <ul class="nav__list">
+            <li><a class="nav__link" href="drop.html">The Drop</a></li>
+            <li><a class="nav__link" href="artisans.html">The Hands</a></li>
+            <li><a class="nav__link" href="house.html" aria-current="page">The House</a></li>
+            <li><a class="nav__link" href="journal.html">Journal</a></li>
+          </ul>
+        </nav>
+
+        <button class="header__bag" type="button" data-bag-label data-cursor="open">
+          Bag (<span data-bag-count>0</span>)
+        </button>
+      </div>
+
+      <span class="shirorekha header__rule" aria-hidden="true"></span>
+    </header>
+
+    <main id="main" class="page">
+      <section class="section">
+        <div class="container lede">
+          <h1 class="lede__title t-hero" data-reveal="lines">The House.</h1>
+          <p class="lede__mono">Not an idea. A house already standing.</p>
+        </div>
+      </section>
+
+      <div class="chapter">
+        <div class="container chapter__inner">
+          <div class="chapter__label">
+            <span class="shirorekha" data-draw aria-hidden="true"></span>
+            01 / Why this exists
+          </div>
+          <div class="chapter__body">
+            <p class="t-2 measure" data-reveal>Their craft sells. They do not exist.</p>
+            <p class="t-body measure" data-reveal>
+              Most clothes are made by someone whose name never reaches the label. The people who embroider, weave and tan leather are paid by the piece and credited nowhere. Their work either disappears into fast fashion or resurfaces on a shelf priced far past reach, the maker still a footnote there too.
+            </p>
+            <p class="t-body measure" data-reveal>
+              Sinगली sits in the gap between those two shelves. Pieces made in small numbered drops, priced so a person can actually buy one, with the maker named as co-creator on the tag. No one builds at three to five thousand rupees with the maker credited this way. That empty lane is ours.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <span class="shirorekha chapter__divider" data-draw aria-hidden="true"></span>
+      </div>
+
+      <div class="chapter">
+        <div class="container chapter__inner">
+          <div class="chapter__label">
+            <span class="shirorekha" data-draw aria-hidden="true"></span>
+            02 / What it is not
+          </div>
+          <div class="chapter__body">
+            <p class="t-2 measure" data-reveal>Not the high street. Not the heritage house.</p>
+            <p class="t-body measure" data-reveal>
+              Not a heritage label playing itself back at you, reverent about its own past. Not a high street rack that turns over every six weeks and forgets who made any of it. Sinगली is deeply Indian without performing Indianness, and it does not need urgency to make a case for a piece.
+            </p>
+            <p class="t-body measure" data-reveal>Sinगली is a person who has already decided. Not arrogant. Settled.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <span class="shirorekha chapter__divider" data-draw aria-hidden="true"></span>
+      </div>
+
+      <div class="chapter">
+        <div class="container chapter__inner">
+          <div class="chapter__label">
+            <span class="shirorekha" data-draw aria-hidden="true"></span>
+            03 / The filters
+          </div>
+          <div class="chapter__body">
+            <p class="t-body measure" data-reveal>Six things have to be true before a piece carries the tag.</p>
+            <div class="house-list">
+              <div class="house-item" data-reveal>
+                <span class="house-item__n">01</span>
+                <p class="house-item__title">A named human, always</p>
+                <p class="t-small t-dim">Every piece carries the name of the person who made it. If nobody can be named, it stops here.</p>
+              </div>
+              <div class="house-item" data-reveal>
+                <span class="house-item__n">02</span>
+                <p class="house-item__title">Human creative ownership</p>
+                <p class="t-small t-dim">The test is ownership of the idea, not whether every stitch was done by hand. A named person has to own the act.</p>
+              </div>
+              <div class="house-item" data-reveal>
+                <span class="house-item__n">03</span>
+                <p class="house-item__title">Made with integrity</p>
+                <p class="t-small t-dim">No replicas. What is sold is what was made, once, by the hand it says it was.</p>
+              </div>
+              <div class="house-item" data-reveal>
+                <span class="house-item__n">04</span>
+                <p class="house-item__title">The canvas earns its place</p>
+                <p class="t-small t-dim">Old denim, a carpet, a plain garment, a pair of shoes. It already had a life before this one.</p>
+              </div>
+              <div class="house-item" data-reveal>
+                <span class="house-item__n">05</span>
+                <p class="house-item__title">Priced with conviction</p>
+                <p class="t-small t-dim">Set to be worn, not shelved. The price does not move once a run opens.</p>
+              </div>
+              <div class="house-item" data-reveal>
+                <span class="house-item__n">06</span>
+                <p class="house-item__title">A story worth wearing</p>
+                <p class="t-small t-dim">If it has nothing to say about the hand or the canvas, it does not leave the studio.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <span class="shirorekha chapter__divider" data-draw aria-hidden="true"></span>
+      </div>
+
+      <div class="chapter">
+        <div class="container chapter__inner">
+          <div class="chapter__label">
+            <span class="shirorekha" data-draw aria-hidden="true"></span>
+            04 / Three rules
+          </div>
+          <div class="chapter__body">
+            <div class="rule-list">
+              <div class="rule-item" data-reveal>
+                <span class="rule-item__n">01</span>
+                <span>No replicas. A piece made once stays made once.</span>
+              </div>
+              <div class="rule-item" data-reveal>
+                <span class="rule-item__n">02</span>
+                <span>No discounts, ever. The price on day one is the price on the last day.</span>
+              </div>
+              <div class="rule-item" data-reveal>
+                <span class="rule-item__n">03</span>
+                <span>No anonymous pieces. If nobody can be named, it does not carry the tag.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <span class="shirorekha chapter__divider" data-draw aria-hidden="true"></span>
+      </div>
+
+      <div class="chapter">
+        <div class="container chapter__inner">
+          <div class="chapter__label">
+            <span class="shirorekha" data-draw aria-hidden="true"></span>
+            05 / The tag
+          </div>
+          <div class="chapter__body">
+            <p class="t-2 measure" data-reveal>The tag is not packaging. It is part of the piece.</p>
+            <div class="tag-diagram" data-reveal>
+              <svg class="tag-diagram__art" viewBox="0 0 400 260" role="img" aria-label="Diagram of a woven tag, a rectangle with a stitched border, carrying the wordmark, a line for the maker's name, a piece number and a small mark">
+                <rect x="24" y="20" width="280" height="200" fill="none" stroke="currentColor" stroke-width="1.5" />
+                <rect x="38" y="34" width="252" height="172" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="4 5" />
+                <text x="164" y="86" text-anchor="middle" fill="currentColor" style="font-family: 'Rozha One', serif; font-size: 30px;">Sin<tspan dx="1">गली</tspan></text>
+                <line x1="64" y1="118" x2="264" y2="118" stroke="currentColor" stroke-width="1" />
+                <text x="164" y="140" text-anchor="middle" fill="currentColor" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.08em;">MAKER'S NAME</text>
+                <line x1="64" y1="156" x2="264" y2="156" stroke="currentColor" stroke-width="1" />
+                <text x="164" y="178" text-anchor="middle" fill="currentColor" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.08em;">3 / 10</text>
+                <circle cx="90" cy="190" r="9" fill="none" stroke="currentColor" stroke-width="1" />
+                <path d="M85 190 l4 4 l7 -8" fill="none" stroke="currentColor" stroke-width="1" />
+              </svg>
+              <div class="tag-diagram__callouts">
+                <p class="tag-diagram__callout" data-reveal>Maker's name</p>
+                <p class="tag-diagram__callout" data-reveal>Piece number</p>
+                <p class="tag-diagram__callout" data-reveal>Maker's mark</p>
+                <p class="tag-diagram__callout" data-reveal>Sinगली</p>
+              </div>
+            </div>
+            <p class="t-body measure" data-reveal>Credit as the product. Dignity is the operating model, not the marketing.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <span class="shirorekha chapter__divider" data-draw aria-hidden="true"></span>
+      </div>
+
+      <div class="chapter">
+        <div class="container chapter__inner">
+          <div class="chapter__label">
+            <span class="shirorekha" data-draw aria-hidden="true"></span>
+            06 / The company
+          </div>
+          <div class="chapter__body">
+            <p class="t-body measure" data-reveal>
+              House of Singully Private Limited, Hyderabad, is the legal entity behind Sinगली.
+            </p>
+            <p class="t-body measure" data-reveal>
+              Write to <a href="mailto:hello@singully.com">hello@singully.com</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" data-theme="dark" data-footer>
+      <div class="container">
+        <span class="shirorekha shirorekha--footer footer__rule" data-draw aria-hidden="true"></span>
+
+        <div class="footer__wordmark">
+          <span class="wordmark">Sin<span>गली</span></span>
+        </div>
+
+        <div class="footer__cols">
+          <div class="footer__col">
+            <h2 class="footer__col-title">House</h2>
+            <ul>
+              <li><a href="drop.html">The Drop</a></li>
+              <li><a href="artisans.html">The Hands</a></li>
+              <li><a href="house.html">The House</a></li>
+              <li><a href="journal.html">Journal</a></li>
+              <li><a href="folk.html">गली Folk</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h2 class="footer__col-title">Help</h2>
+            <ul>
+              <li><a href="help.html#sizing">Sizing</a></li>
+              <li><a href="help.html#shipping">Shipping and returns</a></li>
+              <li><a href="help.html#care">Care</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h2 class="footer__col-title">Legal</h2>
+            <ul>
+              <li><a href="legal.html#privacy">Privacy</a></li>
+              <li><a href="legal.html#terms">Terms</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h2 class="footer__col-title">Write</h2>
+            <ul>
+              <li><a href="mailto:hello@singully.com">hello@singully.com</a></li>
+              <li>
+                <a href="https://www.instagram.com/singully.official/" rel="me noopener" target="_blank">
+                  Instagram @singully.official
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__legal">
+          <span>House of Singully Private Limited, Hyderabad</span>
+          <span>&copy; <span data-year>2026</span></span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Order matters. GSAP, then the plugin, then Lenis, then ours. -->
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/vendor/ScrollTrigger.min.js"></script>
+    <script src="assets/vendor/lenis.min.js"></script>
+    <script src="assets/js/motion.js"></script>
+    <script src="assets/js/site.js"></script>
+  </body>
+</html>

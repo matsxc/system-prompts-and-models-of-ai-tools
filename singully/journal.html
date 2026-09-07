@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Journal. Sinगली</title>
+    <meta
+      name="description"
+      content="Journal. Sinगली. Pieces made in small numbered drops by makers named on the tag."
+    />
+    <meta name="theme-color" content="#F4F1EC" />
+
+    <!-- The शिरोरेखा, at 32px. Inline so the page never asks for a file. -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F4F1EC'/%3E%3Crect x='5' y='12' width='22' height='2.5' fill='%232E2C2A'/%3E%3C/svg%3E" />
+
+    <!-- One font request. Rozha One display, Mukta body, IBM Plex Mono credits. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Mukta:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
+
+    <link rel="stylesheet" href="assets/css/tokens.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/pages.css" />
+
+    <!--
+      Runs before first paint. Marks that scripting is present, so nothing
+      starts hidden on a page that cannot animate, and decides whether this
+      visit gets the preloader at all.
+    -->
+    <script>
+      (function (d, w) {
+        var h = d.documentElement;
+        h.classList.add("js");
+        var skip = false;
+        try {
+          skip = w.sessionStorage.getItem("sin_seen") === "1";
+        } catch (e) {
+          skip = false;
+        }
+        if (
+          w.matchMedia &&
+          w.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ) {
+          skip = true;
+        }
+        if (skip) h.classList.add("sin-skip-intro");
+      })(document, window);
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- M1. The शिरोरेखा draws, the wordmark drops from it, both rise into
+         the header. Removed from the document when the sequence ends. -->
+    <div class="preloader" data-preloader aria-hidden="true">
+      <div class="preloader__stage">
+        <span class="preloader__rule"></span>
+        <span class="preloader__mark wordmark">Sin<span>गली</span></span>
+      </div>
+    </div>
+
+    <!-- M12. Present at load, lifted once fonts are ready. -->
+    <div class="transition" data-transition aria-hidden="true"></div>
+
+    <header class="header" data-header>
+      <div class="container header__inner">
+        <a class="header__brand wordmark" href="index.html" aria-label="Sinगली, home">Sin<span>गली</span></a>
+
+        <button
+          class="nav__toggle"
+          type="button"
+          data-nav-toggle
+          aria-controls="sin-nav"
+          aria-expanded="false"
+        >
+          <span data-nav-toggle-label>Menu</span>
+        </button>
+
+        <nav class="nav" id="sin-nav" data-nav aria-label="Primary">
+          <ul class="nav__list">
+            <li><a class="nav__link" href="drop.html">The Drop</a></li>
+            <li><a class="nav__link" href="artisans.html">The Hands</a></li>
+            <li><a class="nav__link" href="house.html">The House</a></li>
+            <li><a class="nav__link" href="journal.html" aria-current="page">Journal</a></li>
+          </ul>
+        </nav>
+
+        <button class="header__bag" type="button" data-bag-label data-cursor="open">
+          Bag (<span data-bag-count>0</span>)
+        </button>
+      </div>
+
+      <span class="shirorekha header__rule" aria-hidden="true"></span>
+    </header>
+
+    <main id="main" class="page">
+      <section class="section">
+        <div class="container lede">
+          <h1 class="lede__title t-hero" data-reveal="lines">Journal.</h1>
+          <p class="lede__mono">Behind the build.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="journal-list">
+            <article class="journal-entry" data-reveal>
+              <span class="journal-entry__media media" data-reveal>
+                <img src="assets/img/journal-01.svg" alt="Fabric swatches on a bone-toned weave, notebook study placeholder." />
+              </span>
+              <div>
+                <p class="journal-entry__meta t-mono">14 Feb 2026 · 3 min read</p>
+                <h2 class="journal-entry__title t-2">First stitch.</h2>
+                <p class="journal-entry__standfirst t-body">The first piece, before it had a name.</p>
+                <div class="stack measure">
+                  <p>The first thing made for Edition 01 was not the piece that photographs well. It was a swatch, worked over a weekend, to see whether the stitch could carry the weight of a full garment.</p>
+                  <p>It could. Everything since has been about not getting in its way.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="journal-entry" data-reveal>
+              <span class="journal-entry__media media" data-reveal>
+                <img src="assets/img/journal-02.svg" alt="Kraft paper tag on a sand-toned block print ground, packaging study placeholder." />
+              </span>
+              <div>
+                <p class="journal-entry__meta t-mono">22 Mar 2026 · 2 min read</p>
+                <h2 class="journal-entry__title t-2">Testing ₹3,500.</h2>
+                <p class="journal-entry__standfirst t-body">A number that had to hold up in the studio, not just on a slide.</p>
+                <div class="stack measure">
+                  <p>Three to five thousand rupees is easy to write down and harder to build a piece against. We priced a shirt at ₹3,500 and worked backward, checking what the maker's share and the cotton and the hours actually cost.</p>
+                  <p>The number held. That is the only reason it stayed.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="journal-entry" data-reveal>
+              <span class="journal-entry__media media" data-reveal>
+                <img src="assets/img/journal-03.svg" alt="Ledger pages on an ink-toned twill ground, documentation study placeholder." />
+              </span>
+              <div>
+                <p class="journal-entry__meta t-mono">30 Apr 2026 · 3 min read</p>
+                <h2 class="journal-entry__title t-2">The tag is the product.</h2>
+                <p class="journal-entry__standfirst t-body">Not packaging around the piece. Part of it.</p>
+                <div class="stack measure">
+                  <p>Early samples put the maker's name on a care label, folded into the seam where nobody looks. That version got thrown out. The tag now sits where a size tag usually sits, and it says more than a size ever did.</p>
+                  <p>Credit as the product. Dignity is the operating model, not the marketing.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="journal-entry" data-reveal>
+              <span class="journal-entry__media media" data-reveal>
+                <img src="assets/img/journal-01.svg" alt="Fabric swatches on a bone-toned weave, notebook study placeholder." />
+              </span>
+              <div>
+                <p class="journal-entry__meta t-mono">18 Jun 2026 · 4 min read</p>
+                <h2 class="journal-entry__title t-2">Finding the hand.</h2>
+                <p class="journal-entry__standfirst t-body">The search is the content. Not a finished collaboration announced after the fact.</p>
+                <div class="stack measure">
+                  <p>We are not looking for a name to attach to a press release. We are looking for someone very good at one thing, who has not yet been asked to put their name on their own work.</p>
+                  <p>Edition 02 is still in that search. When the hand is found, this page changes before anything else does.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="journal-entry" data-reveal>
+              <span class="journal-entry__media media" data-reveal>
+                <img src="assets/img/journal-02.svg" alt="Kraft paper tag on a sand-toned block print ground, packaging study placeholder." />
+              </span>
+              <div>
+                <p class="journal-entry__meta t-mono">09 Jul 2026 · 2 min read</p>
+                <h2 class="journal-entry__title t-2">Why we will never discount.</h2>
+                <p class="journal-entry__standfirst t-body">A discount on a piece is a pay cut for the person who made it.</p>
+                <div class="stack measure">
+                  <p>A share of what a piece sells for only means something if the price stays where it was set. Cut the price at the end of a season and the maker's share is cut with it, quietly, after the fact.</p>
+                  <p>So the price on day one is the price on the last day. That is the whole rule.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="journal-entry" data-reveal>
+              <span class="journal-entry__media media" data-reveal>
+                <img src="assets/img/journal-03.svg" alt="Ledger pages on an ink-toned twill ground, documentation study placeholder." />
+              </span>
+              <div>
+                <p class="journal-entry__meta t-mono">21 Aug 2026 · 3 min read</p>
+                <h2 class="journal-entry__title t-2">A carpet becomes a coat.</h2>
+                <p class="journal-entry__standfirst t-body">A carpet that had a floor becomes a coat that has a person.</p>
+                <div class="stack measure">
+                  <p>The Carpet Coat started as exactly that, a carpet, worn at the edges, headed for a skip. Cutting into it felt wrong for about an hour, then it stopped feeling wrong and started feeling obvious.</p>
+                  <p>We do not manufacture. We transform. This is what that sentence looks like on a table.</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" data-theme="dark" data-footer>
+      <div class="container">
+        <span class="shirorekha shirorekha--footer footer__rule" data-draw aria-hidden="true"></span>
+
+        <div class="footer__wordmark">
+          <span class="wordmark">Sin<span>गली</span></span>
+        </div>
+
+        <div class="footer__cols">
+          <div class="footer__col">
+            <h2 class="footer__col-title">House</h2>
+            <ul>
+              <li><a href="drop.html">The Drop</a></li>
+              <li><a href="artisans.html">The Hands</a></li>
+              <li><a href="house.html">The House</a></li>
+              <li><a href="journal.html">Journal</a></li>
+              <li><a href="folk.html">गली Folk</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h2 class="footer__col-title">Help</h2>
+            <ul>
+              <li><a href="help.html#sizing">Sizing</a></li>
+              <li><a href="help.html#shipping">Shipping and returns</a></li>
+              <li><a href="help.html#care">Care</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h2 class="footer__col-title">Legal</h2>
+            <ul>
+              <li><a href="legal.html#privacy">Privacy</a></li>
+              <li><a href="legal.html#terms">Terms</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h2 class="footer__col-title">Write</h2>
+            <ul>
+              <li><a href="mailto:hello@singully.com">hello@singully.com</a></li>
+              <li>
+                <a href="https://www.instagram.com/singully.official/" rel="me noopener" target="_blank">
+                  Instagram @singully.official
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__legal">
+          <span>House of Singully Private Limited, Hyderabad</span>
+          <span>&copy; <span data-year>2026</span></span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Order matters. GSAP, then the plugin, then Lenis, then ours. -->
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/vendor/ScrollTrigger.min.js"></script>
+    <script src="assets/vendor/lenis.min.js"></script>
+    <script src="assets/js/motion.js"></script>
+    <script src="assets/js/site.js"></script>
+  </body>
+</html>

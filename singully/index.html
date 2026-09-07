@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sinगली</title>
+    <meta
+      name="description"
+      content="Sinगली. Pieces made in small numbered drops by makers named on the tag."
+    />
+    <meta name="theme-color" content="#F4F1EC" />
+
+    <!-- The शिरोरेखा, at 32px. Inline so the page never asks for a file. -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F4F1EC'/%3E%3Crect x='5' y='12' width='22' height='2.5' fill='%232E2C2A'/%3E%3C/svg%3E" />
+
+    <!-- One font request. Rozha One display, Mukta body, IBM Plex Mono credits. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Mukta:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
+
+    <link rel="stylesheet" href="assets/css/tokens.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+
+    <!--
+      Runs before first paint. Marks that scripting is present, so nothing
+      starts hidden on a page that cannot animate, and decides whether this
+      visit gets the preloader at all.
+    -->
+    <script>
+      (function (d, w) {
+        var h = d.documentElement;
+        h.classList.add("js");
+        var skip = false;
+        try {
+          skip = w.sessionStorage.getItem("sin_seen") === "1";
+        } catch (e) {
+          skip = false;
+        }
+        if (
+          w.matchMedia &&
+          w.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ) {
+          skip = true;
+        }
+        if (skip) h.classList.add("sin-skip-intro");
+      })(document, window);
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- H0. M1. The शिरोरेखा draws, the wordmark drops from it, both rise
+         into the header. Removed from the document when the sequence ends. -->
+    <div class="preloader" data-preloader aria-hidden="true">
+      <div class="preloader__stage">
+        <span class="preloader__rule"></span>
+        <span class="preloader__mark wordmark">Sin<span>गली</span></span>
+      </div>
+    </div>
+
+    <!-- M12. Present at load, lifted once fonts are ready. -->
+    <div class="transition" data-transition aria-hidden="true"></div>
+
+    <header class="header" data-header>
+      <div class="container header__inner">
+        <a
+          class="header__brand wordmark"
+          href="index.html"
+          aria-label="Sinगली, home"
+          aria-current="page"
+          >Sin<span>गली</span></a
+        >
+
+        <button
+          class="nav__toggle"
+          type="button"
+          data-nav-toggle
+          aria-controls="sin-nav"
+          aria-expanded="false"
+        >
+          <span data-nav-toggle-label>Menu</span>
+        </button>
+
+        <nav class="nav" id="sin-nav" data-nav aria-label="Primary">
+          <ul class="nav__list">
+            <li><a class="nav__link" href="drop.html">The Drop</a></li>
+            <li><a class="nav__link" href="artisans.html">The Hands</a></li>
+            <li><a class="nav__link" href="house.html">The House</a></li>
+            <li><a class="nav__link" href="journal.html">Journal</a></li>
+          </ul>
+        </nav>
+
+        <button class="header__bag" type="button" data-bag-label data-cursor="open">
+          Bag (<span data-bag-count>0</span>)
+        </button>
+      </div>
+
+      <span class="shirorekha header__rule" aria-hidden="true"></span>
+    </header>
+
+    <main id="main" class="page">
+      <!-- ================================================================
+           H1 Hero. M2.
+           Headline across all twelve columns, the supporting block indented
+           to 2 through 6, the media in 7 through 12.
+           ================================================================ -->
+      <section class="hero" data-hero aria-labelledby="hero-headline">
+        <div class="container hero__grid">
+          <div class="hero__head">
+            <h1 class="hero__headline" id="hero-headline" data-reveal="lines">
+              <span data-line>Some things are found,</span>
+              <span data-line>not advertised.</span>
+              <span data-line>गली में मिला।</span>
+            </h1>
+          </div>
+
+          <div class="hero__text">
+            <p class="hero__sub t-body" data-hero-reveal>
+              Pieces made in small numbered drops, by a maker who is named on
+              the tag as co-creator and paid for what they made. Ten pieces.
+              Numbered. Then gone.
+            </p>
+
+            <div class="hero__actions" data-hero-reveal>
+              <a class="btn btn--primary" href="drop.html" data-cursor="enter"
+                >Enter the drop</a
+              >
+              <a class="btn" href="artisans.html" data-cursor="enter"
+                >See the hands</a
+              >
+            </div>
+          </div>
+
+          <figure class="hero__figure">
+            <span class="media" data-reveal>
+              <picture>
+                <source
+                  media="(max-width: 719px)"
+                  srcset="assets/img/hero-lane-4x5.svg"
+                />
+                <img
+                  src="assets/img/hero-lane.svg"
+                  alt="An indigo wash with one pale horizon line across it."
+                  width="1600"
+                  height="900"
+                />
+              </picture>
+            </span>
+            <figcaption class="media__caption" data-hero-reveal>
+              Hyderabad. Edition 01. First stitch.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           H2 Chapter 00 / Prologue. M3.
+           Pinned for three screens. One line inks in per quarter turn.
+           ================================================================ -->
+      <section class="prologue" data-prologue aria-label="Prologue">
+        <div class="prologue__pin" data-prologue-pin>
+          <div class="prologue__cloth" aria-hidden="true">
+            <img src="assets/img/prologue-cloth.svg" alt="" />
+          </div>
+
+          <div class="container prologue__inner">
+            <p class="prologue__label">
+              <span
+                class="shirorekha shirorekha--draw"
+                data-prologue-rule
+                aria-hidden="true"
+              ></span>
+              00 / Prologue
+            </p>
+
+            <div class="prologue__lines">
+              <p class="prologue__line" data-prologue-line>
+                You have been wearing someone's work your whole life.
+              </p>
+              <p class="prologue__line" data-prologue-line>
+                You just never knew who.
+              </p>
+              <p class="prologue__line" data-prologue-line>
+                Not the high street. Not the heritage house.
+              </p>
+              <p class="prologue__line" data-prologue-line>
+                The lane nobody turned into.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           H3 Chapter 01 / The Hands. M5.
+           Text in the left four columns, the hold frames in the right six.
+           ================================================================ -->
+      <section class="chapter chapter--hands" id="hands" aria-labelledby="hands-intro">
+        <div class="container">
+          <span
+            class="shirorekha shirorekha--draw chapter__rule"
+            data-draw
+            aria-hidden="true"
+          ></span>
+
+          <div class="chapter__grid">
+            <p class="chapter__tag">01 / The Hands</p>
+
+            <div class="chapter__main">
+              <div class="hands__text">
+                <h2 class="t-2 hands__intro" id="hands-intro" data-reveal="lines">
+                  The maker is not our labour. The maker is our co-creator.
+                </h2>
+                <p class="hands__body" data-reveal>
+                  Every piece carries a woven tag with a name that is not ours,
+                  a number, and a mark. A salary first. Then a share of what
+                  they made. The tag is where credit becomes physical.
+                </p>
+              </div>
+
+              <div class="hands__holds">
+                <button
+                  class="hold"
+                  type="button"
+                  data-hold
+                  data-cursor="hold"
+                  aria-label="Hold to see the hands that made this piece"
+                  data-hold-label="Hold to see the hands"
+                  data-hold-credit="Sinगली × MATS, 3/10"
+                >
+                  <span class="hold__frame media--4x5">
+                    <span class="hold__back">
+                      <span class="media">
+                        <img
+                          src="assets/img/hands-01.svg"
+                          alt="A sand coloured block printed grid on cloth."
+                          width="1200"
+                          height="1500"
+                        />
+                      </span>
+                    </span>
+                    <span class="hold__front">
+                      <span class="media" data-reveal>
+                        <img
+                          src="assets/img/piece-01.svg"
+                          alt="Dark twill cloth in close weave."
+                          width="1200"
+                          height="1500"
+                        />
+                      </span>
+                    </span>
+                  </span>
+                  <span class="hold__label">
+                    <span class="hold__label-text">Hold to see the hands</span>
+                    <span class="hold__progress">0%</span>
+                  </span>
+                </button>
+
+                <button
+                  class="hold hold--desk"
+                  type="button"
+                  data-hold
+                  data-cursor="hold"
+                  aria-label="Hold to see the hands that made this piece"
+                  data-hold-label="Hold to see the hands"
+                  data-hold-credit="Sinगली × MATS, 7/10"
+                >
+                  <span class="hold__frame media--4x5">
+                    <span class="hold__back">
+                      <span class="media">
+                        <img
+                          src="assets/img/hands-02.svg"
+                          alt="Clay coloured twill with the diagonal running across it."
+                          width="1200"
+                          height="1500"
+                        />
+                      </span>
+                    </span>
+                    <span class="hold__front">
+                      <span class="media" data-reveal>
+                        <img
+                          src="assets/img/piece-02.svg"
+                          alt="Pale woven cloth, warp and weft in close view."
+                          width="1200"
+                          height="1500"
+                        />
+                      </span>
+                    </span>
+                  </span>
+                  <span class="hold__label">
+                    <span class="hold__label-text">Hold to see the hands</span>
+                    <span class="hold__progress">0%</span>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           H4 Chapter 02 / The Canvas. M6.
+           The inversion: text sits right, the lane row runs full width.
+           ================================================================ -->
+      <section class="chapter chapter--canvas" id="canvas" aria-labelledby="canvas-intro">
+        <div class="container">
+          <span
+            class="shirorekha shirorekha--draw chapter__rule"
+            data-draw
+            aria-hidden="true"
+          ></span>
+
+          <div class="chapter__grid">
+            <p class="chapter__tag">02 / The Canvas</p>
+
+            <div class="chapter__main">
+              <div class="canvas__text">
+                <h2 class="t-2 canvas__intro" id="canvas-intro" data-reveal="lines">
+                  We do not manufacture. We transform.
+                </h2>
+                <p class="canvas__sub" data-reveal>
+                  Roughly thirty percent of a piece is the canvas. Seventy
+                  percent is the soul.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="chapter__full">
+            <div class="lanes" data-lanes>
+              <article class="lane" tabindex="0" data-cursor="open">
+                <span class="media lane__media" data-reveal>
+                  <img
+                    src="assets/img/lane-01.svg"
+                    alt="An indigo wash held in an upright frame."
+                    width="1200"
+                    height="1600"
+                  />
+                </span>
+                <h3 class="lane__place">Denim</h3>
+                <p class="lane__craft">second life</p>
+                <p class="lane__body">
+                  Old jackets and jeans, opened at the seams and rebuilt by one
+                  hand.
+                </p>
+              </article>
+
+              <article class="lane" tabindex="0" data-cursor="open">
+                <span class="media lane__media" data-reveal>
+                  <img
+                    src="assets/img/lane-02.svg"
+                    alt="A pale bone wash held in an upright frame."
+                    width="1200"
+                    height="1600"
+                  />
+                </span>
+                <h3 class="lane__place">Carpet</h3>
+                <p class="lane__craft">transformed</p>
+                <p class="lane__body">
+                  A carpet that had a floor becomes a coat that has a person.
+                </p>
+              </article>
+
+              <article class="lane" tabindex="0" data-cursor="open">
+                <span class="media lane__media" data-reveal>
+                  <img
+                    src="assets/img/lane-03.svg"
+                    alt="A clay red wash held in an upright frame."
+                    width="1200"
+                    height="1600"
+                  />
+                </span>
+                <h3 class="lane__place">Thread</h3>
+                <p class="lane__craft">heavy embroidery</p>
+                <p class="lane__body">
+                  Hands that have done something a thousand times.
+                </p>
+              </article>
+
+              <article class="lane" tabindex="0" data-cursor="open">
+                <span class="media lane__media" data-reveal>
+                  <img
+                    src="assets/img/lane-04.svg"
+                    alt="A sand gold wash held in an upright frame."
+                    width="1200"
+                    height="1600"
+                  />
+                </span>
+                <h3 class="lane__place">Leather</h3>
+                <p class="lane__craft">tattooed</p>
+                <p class="lane__body">
+                  Ink into hide. Footwear and bags that carry a drawing, not a
+                  logo.
+                </p>
+              </article>
+
+              <article class="lane" tabindex="0" data-cursor="open">
+                <span class="media lane__media" data-reveal>
+                  <img
+                    src="assets/img/lane-05.svg"
+                    alt="A dark ink wash held in an upright frame."
+                    width="1200"
+                    height="1600"
+                  />
+                </span>
+                <h3 class="lane__place">
+                  <a class="lane__link" href="artisans.html">The next one</a>
+                </h3>
+                <p class="lane__craft">the search</p>
+                <p class="lane__body">
+                  We are out looking. When we find the hand, you will meet it
+                  here first.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           H5 Chapter 03 / The Drop. M7.
+           Pinned on desktop while the row of pieces scrubs sideways. Native
+           snap scroll below 1080px.
+           ================================================================ -->
+      <section class="chapter drop" id="drop" data-drop aria-labelledby="drop-intro">
+        <div class="container">
+          <span
+            class="shirorekha shirorekha--draw chapter__rule"
+            data-draw
+            aria-hidden="true"
+          ></span>
+
+          <div class="drop__head">
+            <p class="drop__tag">03 / The Drop</p>
+            <h2 class="t-2 drop__intro" id="drop-intro" data-reveal="lines">
+              Edition 01.
+            </h2>
+            <p class="drop__mono">
+              Ten pieces. Numbered. Then gone. A run is never restocked.
+            </p>
+          </div>
+
+          <div class="pieces" data-drop-track>
+            <a class="piece" href="product.html" data-cursor="open">
+              <span class="media piece__media" data-reveal>
+                <img
+                  src="assets/img/piece-01.svg"
+                  alt="Dark twill cloth in close weave."
+                  width="1200"
+                  height="1500"
+                />
+              </span>
+              <span class="piece__name">Denim, Second Life 01</span>
+              <span class="piece__credit"><span class="nocaps">Sinगली</span> × MATS, 1/10</span>
+              <span class="piece__price">₹4,200</span>
+              <span class="piece__edition">Piece 1 of 10</span>
+            </a>
+
+            <a class="piece" href="product.html" data-cursor="open">
+              <span class="media piece__media" data-reveal>
+                <img
+                  src="assets/img/piece-02.svg"
+                  alt="Pale woven cloth, warp and weft in close view."
+                  width="1200"
+                  height="1500"
+                />
+              </span>
+              <span class="piece__name">Carpet Coat</span>
+              <span class="piece__credit"><span class="nocaps">Sinगली</span> × MATS, 2/10</span>
+              <span class="piece__price">₹5,000</span>
+              <span class="piece__edition">Piece 2 of 10</span>
+            </a>
+
+            <a class="piece" href="product.html" data-cursor="open">
+              <span class="media piece__media" data-reveal>
+                <img
+                  src="assets/img/piece-03.svg"
+                  alt="Indigo denim twill with the diagonal running across it."
+                  width="1200"
+                  height="1500"
+                />
+              </span>
+              <span class="piece__name">Thread Overshirt</span>
+              <span class="piece__credit"><span class="nocaps">Sinगली</span> × MATS, 3/10</span>
+              <span class="piece__price">₹3,800</span>
+              <span class="piece__edition">Piece 3 of 10</span>
+            </a>
+
+            <a class="piece" href="product.html" data-cursor="open">
+              <span class="media piece__media" data-reveal>
+                <img
+                  src="assets/img/piece-04.svg"
+                  alt="Dark twill cloth, the weave running close."
+                  width="1200"
+                  height="1500"
+                />
+              </span>
+              <span class="piece__name">Tattooed Loafer</span>
+              <span class="piece__credit"><span class="nocaps">Sinगली</span> × MATS, 4/10</span>
+              <span class="piece__price">₹4,600</span>
+              <span class="piece__edition">Piece 4 of 10</span>
+            </a>
+
+            <a class="piece" href="product.html" data-cursor="open">
+              <span class="media piece__media" data-reveal>
+                <img
+                  src="assets/img/piece-05.svg"
+                  alt="Pale woven cloth in close view."
+                  width="1200"
+                  height="1500"
+                />
+              </span>
+              <span class="piece__name">Denim, Second Life 02</span>
+              <span class="piece__credit"><span class="nocaps">Sinगली</span> × MATS, 5/10</span>
+              <span class="piece__price">₹3,500</span>
+              <span class="piece__edition">Piece 5 of 10</span>
+            </a>
+
+            <a class="piece" href="product.html" data-cursor="open">
+              <span class="media piece__media" data-reveal>
+                <img
+                  src="assets/img/piece-06.svg"
+                  alt="Indigo denim twill in close view."
+                  width="1200"
+                  height="1500"
+                />
+              </span>
+              <span class="piece__name">Carpet Tote</span>
+              <span class="piece__credit"><span class="nocaps">Sinगली</span> × MATS, 6/10</span>
+              <span class="piece__price">₹3,900</span>
+              <span class="piece__edition">Piece 6 of 10</span>
+            </a>
+
+            <div class="piece drop__end">
+              <span class="piece__edition">Edition 01</span>
+              <a class="btn" href="drop.html" data-cursor="enter">See all ten</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           H6 Chapter 04 / The Tag. M8.
+           The anatomy diagram. Four lines draw out of the tag, then their
+           labels arrive. No figures, no money.
+           ================================================================ -->
+      <section class="chapter chapter--tag" id="tag" aria-labelledby="tag-intro">
+        <div class="container">
+          <span
+            class="shirorekha shirorekha--draw chapter__rule"
+            data-draw
+            aria-hidden="true"
+          ></span>
+
+          <div class="chapter__grid">
+            <p class="chapter__tag">04 / The Tag</p>
+
+            <div class="chapter__main">
+              <h2 class="t-2 tag__intro" id="tag-intro" data-reveal="lines">
+                The tag is not packaging. It is part of the piece.
+              </h2>
+
+            </div>
+          </div>
+
+          <div class="chapter__full">
+              <figure class="tag__art-wrap" data-tag>
+                <!-- Drawn once, used twice: wide with its callouts on a
+                     desktop, cropped close on a phone. -->
+                <svg class="tag__defs" width="0" height="0" aria-hidden="true" focusable="false">
+                  <defs>
+                    <g id="sin-tag-body">
+                    <rect class="tag__face" x="310" y="100" width="380" height="300" />
+                    <rect class="tag__stroke" x="310" y="100" width="380" height="300" />
+                    <rect class="tag__stitch" x="326" y="116" width="348" height="268" />
+                    <text class="tag__wordmark" x="500" y="190" text-anchor="middle">Sinगली</text>
+                    <line class="tag__rule" x1="346" y1="212" x2="654" y2="212" />
+                      <text class="tag__mono" x="500" y="258" text-anchor="middle">MATS</text>
+                      <text class="tag__mono" x="500" y="300" text-anchor="middle">3/10</text>
+                      <rect class="tag__stroke" x="486" y="330" width="28" height="28" />
+                      <line class="tag__rule" x1="486" y1="358" x2="514" y2="330" />
+                    </g>
+                  </defs>
+                </svg>
+
+                <div class="tag__art">
+                  <svg
+                    class="tag__svg tag__svg--wide"
+                    viewBox="0 0 1000 500"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <use href="#sin-tag-body" />
+                    <g class="tag__callouts">
+                      <path class="tag__line" data-tag-line d="M 180 176 H 310" />
+                      <g data-tag-label>
+                        <circle class="tag__dot" cx="310" cy="176" r="3" />
+                        <text class="tag__label nocaps" x="162" y="182" text-anchor="end">Sinगली</text>
+                      </g>
+
+                      <path class="tag__line" data-tag-line d="M 180 250 H 310" />
+                      <g data-tag-label>
+                        <circle class="tag__dot" cx="310" cy="250" r="3" />
+                        <text class="tag__label" x="162" y="256" text-anchor="end">Maker's name</text>
+                      </g>
+
+                      <path class="tag__line" data-tag-line d="M 690 292 H 820" />
+                      <g data-tag-label>
+                        <circle class="tag__dot" cx="690" cy="292" r="3" />
+                        <text class="tag__label" x="838" y="298" text-anchor="start">Piece number</text>
+                      </g>
+
+                      <path class="tag__line" data-tag-line d="M 690 344 H 820" />
+                      <g data-tag-label>
+                        <circle class="tag__dot" cx="690" cy="344" r="3" />
+                        <text class="tag__label" x="838" y="350" text-anchor="start">Maker's mark</text>
+                      </g>
+                    </g>
+                  </svg>
+
+                  <svg
+                    class="tag__svg tag__svg--narrow"
+                    viewBox="270 60 460 380"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <use href="#sin-tag-body" />
+                  </svg>
+                </div>
+
+                <ul class="tag__list">
+                  <li>Maker's name</li>
+                  <li>Piece number</li>
+                  <li>Maker's mark</li>
+                  <li><span class="nocaps">Sinगली</span></li>
+                </ul>
+              </figure>
+
+          </div>
+
+          <div class="chapter__grid chapter__grid--tail">
+            <div class="chapter__main">
+              <div class="tag__text">
+                <p class="tag__body-copy" data-reveal>
+                  Credit as the product. Dignity is the operating model, not the
+                  marketing.
+                </p>
+                <a class="btn" href="house.html" data-cursor="enter"
+                  >Read the house notes</a
+                >
+              </div>
+
+              <figure class="tag__figure">
+                <span class="media media--16x9" data-reveal>
+                  <img
+                    src="assets/img/house-studio.svg"
+                    alt="A dark studio ground marked out in a pale grid."
+                    width="1600"
+                    height="900"
+                  />
+                </span>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           H7 गली Folk. The record, on ink.
+           ================================================================ -->
+      <section class="folk" id="folk" data-theme="dark" aria-labelledby="folk-line">
+        <div class="container">
+          <span
+            class="shirorekha shirorekha--draw chapter__rule"
+            data-draw
+            aria-hidden="true"
+          ></span>
+
+          <div class="folk__grid">
+            <h2 class="t-1 folk__line" id="folk-line" data-reveal="lines">
+              The first five hundred.
+            </h2>
+
+            <div class="folk__text">
+              <p class="folk__body" data-reveal>
+                The first five hundred people to buy a piece get a permanent
+                page on this site. A record, not a loyalty programme. Names,
+                piece numbers, the year.
+              </p>
+              <a class="btn btn--primary" href="folk.html" data-cursor="enter"
+                >See the record</a
+              >
+            </div>
+
+            <p class="folk__count">Founding places taken: 0 of 500</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           H8 Journal strip.
+           ================================================================ -->
+      <section class="section notes" id="journal" aria-labelledby="notes-tag">
+        <div class="container">
+          <span
+            class="shirorekha shirorekha--draw chapter__rule"
+            data-draw
+            aria-hidden="true"
+          ></span>
+          <p class="chapter__tag notes__tag" id="notes-tag">Journal</p>
+
+          <div class="notes__grid">
+            <a class="note" href="journal.html" data-cursor="open">
+              <span class="media note__media" data-reveal>
+                <img
+                  src="assets/img/journal-01.svg"
+                  alt="Cloth swatches laid out on a pale weave."
+                  width="1500"
+                  height="1000"
+                />
+              </span>
+              <span class="note__meta">Journal 01</span>
+              <span class="note__title">First stitch.</span>
+            </a>
+
+            <a class="note" href="journal.html" data-cursor="open">
+              <span class="media note__media" data-reveal>
+                <img
+                  src="assets/img/journal-02.svg"
+                  alt="A paper tag on a sand coloured block grid."
+                  width="1500"
+                  height="1000"
+                />
+              </span>
+              <span class="note__meta">Journal 02</span>
+              <span class="note__title">Testing ₹3,500.</span>
+            </a>
+
+            <a class="note" href="journal.html" data-cursor="open">
+              <span class="media note__media" data-reveal>
+                <img
+                  src="assets/img/journal-03.svg"
+                  alt="A ruled ledger page on dark twill."
+                  width="1500"
+                  height="1000"
+                />
+              </span>
+              <span class="note__meta">Journal 03</span>
+              <span class="note__title">The tag is the product.</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================================================================
+         H9 Footer. M11.
+         ================================================================== -->
+    <footer class="footer" data-theme="dark" data-footer>
+      <div class="container">
+        <span class="shirorekha shirorekha--footer footer__rule" data-draw aria-hidden="true"></span>
+
+        <div class="footer__wordmark">
+          <span class="wordmark">Sin<span>गली</span></span>
+        </div>
+
+        <div class="footer__cols">
+          <div class="footer__col">
+            <h2 class="footer__col-title">House</h2>
+            <ul>
+              <li><a href="drop.html">The Drop</a></li>
+              <li><a href="artisans.html">The Hands</a></li>
+              <li><a href="house.html">The House</a></li>
+              <li><a href="journal.html">Journal</a></li>
+              <li><a href="folk.html">गली Folk</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h2 class="footer__col-title">Help</h2>
+            <ul>
+              <li><a href="help.html#sizing">Sizing</a></li>
+              <li><a href="help.html#shipping">Shipping and returns</a></li>
+              <li><a href="help.html#care">Care</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h2 class="footer__col-title">Legal</h2>
+            <ul>
+              <li><a href="legal.html#privacy">Privacy</a></li>
+              <li><a href="legal.html#terms">Terms</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h2 class="footer__col-title">Write</h2>
+            <ul>
+              <li><a href="mailto:hello@singully.com">hello@singully.com</a></li>
+              <li>
+                <a href="https://www.instagram.com/singully.official/" rel="me noopener" target="_blank">
+                  Instagram @singully.official
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="marquee footer__marquee" aria-hidden="true">
+          <div class="marquee__track">
+            <div class="marquee__group">
+              <span>Denim, second life.</span>
+              <span>Carpet, transformed.</span>
+              <span>Thread.</span>
+              <span>Leather, tattooed.</span>
+              <span>Hyderabad.</span>
+              <span>Edition 01.</span>
+            </div>
+            <div class="marquee__group">
+              <span>Denim, second life.</span>
+              <span>Carpet, transformed.</span>
+              <span>Thread.</span>
+              <span>Leather, tattooed.</span>
+              <span>Hyderabad.</span>
+              <span>Edition 01.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer__legal">
+          <span>House of Singully Private Limited, Hyderabad</span>
+          <span>&copy; <span data-year>2026</span></span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Order matters. GSAP, then the plugin, then Lenis, then ours. -->
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/vendor/ScrollTrigger.min.js"></script>
+    <script src="assets/vendor/lenis.min.js"></script>
+    <script src="assets/js/motion.js"></script>
+    <script src="assets/js/site.js"></script>
+  </body>
+</html>

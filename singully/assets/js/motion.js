@@ -108,6 +108,7 @@
       this.m5Hold();
       this.m6Lanes();
       this.m7Drop();
+      this.m8Tag();
       this.m8House();
       this.m9Cursor();
       this.m10Header();
@@ -125,6 +126,7 @@
       if (document.fonts && document.fonts.ready) {
         document.fonts.ready.then(function () {
           self.resplit();
+          if (self.fitFooter) self.fitFooter();
           self.refresh();
         });
       }
@@ -140,6 +142,7 @@
       var self = this;
       var onResize = debounce(function () {
         self.resplit();
+        if (self.fitFooter) self.fitFooter();
         self.refresh();
       }, 200);
       window.addEventListener("resize", onResize);
@@ -191,6 +194,29 @@
 
     splitLines: function (el) {
       if (!el) return [];
+
+      // Lines the writer set by hand. Each one gets a mask of its own and
+      // the measuring pass is skipped, so a break that carries meaning is
+      // never re-broken by the browser.
+      var written = qsa("[data-line]", el);
+      if (written.length) {
+        var authored = [];
+        for (var w = 0; w < written.length; w++) {
+          var node = written[w];
+          var parent = node.parentNode;
+          if (!parent.classList || !parent.classList.contains("sin-line")) {
+            var wrap = document.createElement("span");
+            wrap.className = "sin-line";
+            parent.insertBefore(wrap, node);
+            wrap.appendChild(node);
+            node.classList.add("sin-line__inner");
+          }
+          authored.push(node);
+        }
+        el.__sinLines = authored;
+        if (this.splits.indexOf(el) === -1) this.splits.push(el);
+        return authored;
+      }
 
       if (typeof el.__sinHTML !== "string") el.__sinHTML = el.innerHTML;
       el.innerHTML = el.__sinHTML;
@@ -533,7 +559,9 @@
             once: true,
             onEnter: function () {
               el.__sinPlayed = true;
-              gsap.to(lines, {
+              // Read the lines at play time. A re-split once the real face
+              // arrives replaces the nodes this trigger was created with.
+              gsap.to(el.__sinLines || lines, {
                 yPercent: 0,
                 duration: 0.9,
                 stagger: 0.06,
@@ -816,8 +844,21 @@
             return;
           }
 
+          // Measured from layout offsets and the track's untransformed left
+          // edge, so a refresh part way through the scrub still reads the
+          // same number as a refresh at rest.
           var distance = function () {
-            return Math.max(0, track.scrollWidth - window.innerWidth + 64);
+            var kids = Array.prototype.slice.call(track.children);
+            if (!kids.length) return 0;
+            var first = kids[0];
+            var last = kids[kids.length - 1];
+            var content = last.offsetLeft + last.offsetWidth - first.offsetLeft;
+            var x = Number(gsap.getProperty(track, "x")) || 0;
+            var pad = track.getBoundingClientRect().left - x;
+            return Math.max(
+              0,
+              Math.round(content - (window.innerWidth - pad * 2))
+            );
           };
 
           if (distance() <= 0) return;
@@ -854,6 +895,91 @@
           });
         };
       });
+    },
+
+    /* ====================================================================
+       M8 The Tag diagram.
+       Four callout lines draw out of the woven tag, then their labels fade
+       in behind them. Stroke length is measured off the geometry so the
+       dash is exactly as long as the line it hides.
+       ==================================================================== */
+
+    m8Tag: function () {
+      var self = this;
+      var figures = qsa("[data-tag], .tag-diagram");
+      if (!figures.length) return null;
+
+      figures.forEach(function (fig) {
+        if (fig.__sinTag) return;
+        fig.__sinTag = true;
+
+        var lines = qsa("[data-tag-line]", fig);
+        var labels = qsa("[data-tag-label]", fig);
+        if (!lines.length && !labels.length) return;
+
+        lines.forEach(function (line) {
+          var len = 0;
+          if (typeof line.getTotalLength === "function") {
+            try {
+              len = line.getTotalLength();
+            } catch (e) {
+              len = 0;
+            }
+          }
+          line.__sinLen = len > 0 ? len : 240;
+        });
+
+        if (self.reduced) {
+          lines.forEach(function (line) {
+            gsap.set(line, { strokeDasharray: "none", strokeDashoffset: 0 });
+          });
+          if (labels.length) gsap.set(labels, { opacity: 1 });
+          return;
+        }
+
+        lines.forEach(function (line) {
+          gsap.set(line, {
+            strokeDasharray: line.__sinLen,
+            strokeDashoffset: line.__sinLen
+          });
+        });
+        if (labels.length) gsap.set(labels, { opacity: 0 });
+
+        var play = function () {
+          var tl = gsap.timeline();
+          tl.to(
+            lines,
+            {
+              strokeDashoffset: 0,
+              duration: 0.8,
+              stagger: 0.15,
+              ease: "power2.inOut"
+            },
+            0
+          );
+          if (labels.length) {
+            tl.to(
+              labels,
+              { opacity: 1, duration: 0.5, stagger: 0.15, ease: "none" },
+              0.45
+            );
+          }
+          return tl;
+        };
+
+        if (ScrollTrigger) {
+          ScrollTrigger.create({
+            trigger: fig,
+            start: "top 70%",
+            once: true,
+            onEnter: play
+          });
+        } else {
+          play();
+        }
+      });
+
+      return this;
     },
 
     /* ====================================================================
@@ -1070,7 +1196,26 @@
       if (!footer) return null;
 
       var rule = qs(".shirorekha", footer);
+      var mask = qs(".footer__wordmark", footer);
       var mark = qs(".footer__wordmark > span", footer);
+
+      // The wordmark hangs from the super rule, so it has to be exactly as
+      // wide as the rule. Measured off the real glyphs rather than guessed
+      // from a viewport unit, and measured again when the face or the width
+      // changes.
+      this.fitFooter = function () {
+        if (!mask || !mark) return;
+        mask.style.fontSize = "";
+        var avail = mask.clientWidth;
+        if (!avail) return;
+        var base = parseFloat(window.getComputedStyle(mask).fontSize) || 16;
+        var range = document.createRange();
+        range.selectNodeContents(mark);
+        var w = range.getBoundingClientRect().width;
+        if (!w) return;
+        mask.style.fontSize = (base * (avail / w)).toFixed(2) + "px";
+      };
+      this.fitFooter();
 
       if (this.reduced) {
         if (rule) gsap.set(rule, { scaleX: 1 });

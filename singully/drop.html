@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Drop. Sinगली</title>
+    <meta
+      name="description"
+      content="The Drop. Sinगली. Pieces made in small numbered drops by makers named on the tag."
+    />
+    <meta name="theme-color" content="#F4F1EC" />
+
+    <!-- The शिरोरेखा, at 32px. Inline so the page never asks for a file. -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F4F1EC'/%3E%3Crect x='5' y='12' width='22' height='2.5' fill='%232E2C2A'/%3E%3C/svg%3E" />
+
+    <!-- One font request. Rozha One display, Mukta body, IBM Plex Mono credits. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Mukta:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
+
+    <link rel="stylesheet" href="assets/css/tokens.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/pages.css" />
+
+    <!--
+      Runs before first paint. Marks that scripting is present, so nothing
+      starts hidden on a page that cannot animate, and decides whether this
+      visit gets the preloader at all.
+    -->
+    <script>
+      (function (d, w) {
+        var h = d.documentElement;
+        h.classList.add("js");
+        var skip = false;
+        try {
+          skip = w.sessionStorage.getItem("sin_seen") === "1";
+        } catch (e) {
+          skip = false;
+        }
+        if (
+          w.matchMedia &&
+          w.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ) {
+          skip = true;
+        }
+        if (skip) h.classList.add("sin-skip-intro");
+      })(document, window);
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- M1. The शिरोरेखा draws, the wordmark drops from it, both rise into
+         the header. Removed from the document when the sequence ends. -->
+    <div class="preloader" data-preloader aria-hidden="true">
+      <div class="preloader__stage">
+        <span class="preloader__rule"></span>
+        <span class="preloader__mark wordmark">Sin<span>गली</span></span>
+      </div>
+    </div>
+
+    <!-- M12. Present at load, lifted once fonts are ready. -->
+    <div class="transition" data-transition aria-hidden="true"></div>
+
+    <header class="header" data-header>
+      <div class="container header__inner">
+        <a class="header__brand wordmark" href="index.html" aria-label="Sinगली, home">Sin<span>गली</span></a>
+
+        <button
+          class="nav__toggle"
+          type="button"
+          data-nav-toggle
+          aria-controls="sin-nav"
+          aria-expanded="false"
+        >
+          <span data-nav-toggle-label>Menu</span>
+        </button>
+
+        <nav class="nav" id="sin-nav" data-nav aria-label="Primary">
+          <ul class="nav__list">
+            <li><a class="nav__link" href="drop.html" aria-current="page">The Drop</a></li>
+            <li><a class="nav__link" href="artisans.html">The Hands</a></li>
+            <li><a class="nav__link" href="house.html">The House</a></li>
+            <li><a class="nav__link" href="journal.html">Journal</a></li>
+          </ul>
+        </nav>
+
+        <button class="header__bag" type="button" data-bag-label data-cursor="open">
+          Bag (<span data-bag-count>0</span>)
+        </button>
+      </div>
+
+      <span class="shirorekha header__rule" aria-hidden="true"></span>
+    </header>
+
+    <main id="main" class="page">
+      <section class="section">
+        <div class="container lede">
+          <h1 class="lede__title t-hero" data-reveal="lines">Edition 01.</h1>
+          <p class="lede__mono">Ten pieces. One maker. Numbered, then gone.</p>
+        </div>
+      </section>
+
+      <span class="shirorekha" data-draw aria-hidden="true"></span>
+
+      <section class="section" data-piece-grid>
+        <div class="container">
+          <div class="filters">
+            <div class="filters__group" role="group" aria-label="Filter by category">
+              <span class="filters__label">Show</span>
+              <button class="filter-btn" type="button" data-cat-filter="all" aria-pressed="true">All</button>
+              <button class="filter-btn" type="button" data-cat-filter="apparel" aria-pressed="false">Apparel</button>
+              <button class="filter-btn" type="button" data-cat-filter="footwear" aria-pressed="false">Footwear</button>
+              <button class="filter-btn" type="button" data-cat-filter="bags" aria-pressed="false">Bags</button>
+            </div>
+            <div class="filters__group" role="group" aria-label="Filter by canvas">
+              <span class="filters__label">Canvas</span>
+              <button class="filter-btn" type="button" data-canvas-filter="denim" aria-pressed="false">Denim</button>
+              <button class="filter-btn" type="button" data-canvas-filter="carpet" aria-pressed="false">Carpet</button>
+              <button class="filter-btn" type="button" data-canvas-filter="thread" aria-pressed="false">Thread</button>
+              <button class="filter-btn" type="button" data-canvas-filter="leather" aria-pressed="false">Leather</button>
+            </div>
+          </div>
+
+          <div class="piece-grid" data-piece-list>
+            <a class="piece" href="product.html" data-cursor="enter" data-cat="apparel" data-canvas="denim">
+              <span class="piece__media media" data-reveal>
+                <img src="assets/img/piece-01.svg" alt="Ink-toned twill fabric texture, placeholder for the finished piece photograph." />
+              </span>
+              <span class="piece__name t-3">Denim, Second Life 01</span>
+              <span class="piece__credit t-mono">Sinगली × MATS, 1/10</span>
+              <span class="piece__price t-3">₹4,200</span>
+              <span class="piece__edition t-mono">Piece 1 of 10</span>
+            </a>
+
+            <a class="piece" href="product.html" data-cursor="enter" data-cat="apparel" data-canvas="carpet">
+              <span class="piece__media media" data-reveal>
+                <img src="assets/img/piece-02.svg" alt="Bone-toned woven fabric texture, placeholder for the finished piece photograph." />
+              </span>
+              <span class="piece__name t-3">Carpet Coat</span>
+              <span class="piece__credit t-mono">Sinगली × MATS, 2/10</span>
+              <span class="piece__price t-3">₹5,000</span>
+              <span class="piece__edition t-mono">Piece 2 of 10</span>
+            </a>
+
+            <a class="piece" href="product.html" data-cursor="enter" data-cat="apparel" data-canvas="thread">
+              <span class="piece__media media" data-reveal>
+                <img src="assets/img/piece-03.svg" alt="Indigo denim twill texture, placeholder for the finished piece photograph." />
+              </span>
+              <span class="piece__name t-3">Thread Overshirt</span>
+              <span class="piece__credit t-mono">Sinगली × MATS, 3/10</span>
+              <span class="piece__price t-3">₹3,800</span>
+              <span class="piece__edition t-mono">Piece 3 of 10</span>
+            </a>
+
+            <a class="piece" href="product.html" data-cursor="enter" data-cat="footwear" data-canvas="leather">
+              <span class="piece__media media" data-reveal>
+                <img src="assets/img/piece-04.svg" alt="Ink-toned twill fabric texture, placeholder for the finished piece photograph." />
+              </span>
+              <span class="piece__name t-3">Tattooed Loafer</span>
+              <span class="piece__credit t-mono">Sinगली × MATS, 4/10</span>
+              <span class="piece__price t-3">₹4,600</span>
+              <span class="piece__edition t-mono">Piece 4 of 10</span>
+            </a>
+
+            <a class="piece" href="product.html" data-cursor="enter" data-cat="apparel" data-canvas="denim">
+              <span class="piece__media media" data-reveal>
+                <img src="assets/img/piece-05.svg" alt="Bone-toned woven fabric texture, placeholder for the finished piece photograph." />
+              </span>
+              <span class="piece__name t-3">Denim, Second Life 02</span>
+              <span class="piece__credit t-mono">Sinगली × MATS, 5/10</span>
+              <span class="piece__price t-3">₹3,500</span>
+              <span class="piece__edition t-mono">Piece 5 of 10</span>
+            </a>
+
+            <a class="piece" href="product.html" data-cursor="enter" data-cat="bags" data-canvas="carpet">
+              <span class="piece__media media" data-reveal>
+                <img src="assets/img/piece-06.svg" alt="Indigo denim twill texture, placeholder for the finished piece photograph." />
+              </span>
+              <span class="piece__name t-3">Carpet Tote</span>
+              <span class="piece__credit t-mono">Sinगली × MATS, 6/10</span>
+              <span class="piece__price t-3">₹3,900</span>
+              <span class="piece__edition t-mono">Piece 6 of 10</span>
+            </a>
+
+            <a class="piece" href="product.html" data-cursor="enter" data-cat="apparel" data-canvas="thread">
+              <span class="piece__media media" data-reveal>
+                <img src="assets/img/piece-01.svg" alt="Ink-toned twill fabric texture, placeholder for the finished piece photograph." />
+              </span>
+              <span class="piece__name t-3">Thread Kurta</span>
+              <span class="piece__credit t-mono">Sinगली × MATS, 7/10</span>
+              <span class="piece__price t-3">₹4,400</span>
+              <span class="piece__edition t-mono">Piece 7 of 10</span>
+            </a>
+
+            <a class="piece" href="product.html" data-cursor="enter" data-cat="bags" data-canvas="denim">
+              <span class="piece__media media" data-reveal>
+                <img src="assets/img/piece-02.svg" alt="Bone-toned woven fabric texture, placeholder for the finished piece photograph." />
+              </span>
+              <span class="piece__name t-3">Denim Sling</span>
+              <span class="piece__credit t-mono">Sinगली × MATS, 8/10</span>
+              <span class="piece__price t-3">₹3,600</span>
+              <span class="piece__edition t-mono">Piece 8 of 10</span>
+            </a>
+
+            <a class="piece" href="product.html" data-cursor="enter" data-cat="footwear" data-canvas="leather">
+              <span class="piece__media media" data-reveal>
+                <img src="assets/img/piece-03.svg" alt="Indigo denim twill texture, placeholder for the finished piece photograph." />
+              </span>
+              <span class="piece__name t-3">Tattooed Slide</span>
+              <span class="piece__credit t-mono">Sinगली × MATS, 9/10</span>
+              <span class="piece__price t-3">₹3,700</span>
+              <span class="piece__edition t-mono">Piece 9 of 10</span>
+            </a>
+
+            <a class="piece" href="product.html" data-cursor="enter" data-cat="apparel" data-canvas="carpet">
+              <span class="piece__media media" data-reveal>
+                <img src="assets/img/piece-04.svg" alt="Ink-toned twill fabric texture, placeholder for the finished piece photograph." />
+              </span>
+              <span class="piece__name t-3">Carpet Overshirt</span>
+              <span class="piece__credit t-mono">Sinगली × MATS, 10/10</span>
+              <span class="piece__price t-3">₹4,800</span>
+              <span class="piece__edition t-mono">Piece 10 of 10</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <span class="shirorekha" data-draw aria-hidden="true"></span>
+
+      <section class="section">
+        <div class="container">
+          <p class="t-2 measure" data-reveal>When a run closes, the tag is retired.</p>
+          <form class="field-row" data-signup-form novalidate>
+            <div class="field">
+              <label class="field__label" for="drop-email">Hear about Edition 02.</label>
+              <input class="field__input" type="email" id="drop-email" name="email" autocomplete="email" placeholder="you@email.com" required />
+            </div>
+            <button class="btn btn--primary" type="submit">Notify me</button>
+            <p class="field__note" data-form-note aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" data-theme="dark" data-footer>
+      <div class="container">
+        <span class="shirorekha shirorekha--footer footer__rule" data-draw aria-hidden="true"></span>
+
+        <div class="footer__wordmark">
+          <span class="wordmark">Sin<span>गली</span></span>
+        </div>
+
+        <div class="footer__cols">
+          <div class="footer__col">
+            <h2 class="footer__col-title">House</h2>
+            <ul>
+              <li><a href="drop.html">The Drop</a></li>
+              <li><a href="artisans.html">The Hands</a></li>
+              <li><a href="house.html">The House</a></li>
+              <li><a href="journal.html">Journal</a></li>
+              <li><a href="folk.html">गली Folk</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h2 class="footer__col-title">Help</h2>
+            <ul>
+              <li><a href="help.html#sizing">Sizing</a></li>
+              <li><a href="help.html#shipping">Shipping and returns</a></li>
+              <li><a href="help.html#care">Care</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h2 class="footer__col-title">Legal</h2>
+            <ul>
+              <li><a href="legal.html#privacy">Privacy</a></li>
+              <li><a href="legal.html#terms">Terms</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h2 class="footer__col-title">Write</h2>
+            <ul>
+              <li><a href="mailto:hello@singully.com">hello@singully.com</a></li>
+              <li>
+                <a href="https://www.instagram.com/singully.official/" rel="me noopener" target="_blank">
+                  Instagram @singully.official
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__legal">
+          <span>House of Singully Private Limited, Hyderabad</span>
+          <span>&copy; <span data-year>2026</span></span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Order matters. GSAP, then the plugin, then Lenis, then ours. -->
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/vendor/ScrollTrigger.min.js"></script>
+    <script src="assets/vendor/lenis.min.js"></script>
+    <script src="assets/js/motion.js"></script>
+    <script src="assets/js/site.js"></script>
+
+    <!-- Page behaviour local to drop.html: category and canvas filters, and
+         the Edition 02 signup note. Nothing here touches assets/js. -->
+    <script>
+      (function () {
+        var grid = document.querySelector("[data-piece-list]");
+        if (!grid) return;
+
+        var pieces = Array.prototype.slice.call(grid.querySelectorAll(".piece"));
+        var catBtns = Array.prototype.slice.call(document.querySelectorAll("[data-cat-filter]"));
+        var canvasBtns = Array.prototype.slice.call(document.querySelectorAll("[data-canvas-filter]"));
+        var state = { cat: "all", canvas: "any" };
+
+        function apply() {
+          pieces.forEach(function (p) {
+            var okCat = state.cat === "all" || p.getAttribute("data-cat") === state.cat;
+            var okCanvas = state.canvas === "any" || p.getAttribute("data-canvas") === state.canvas;
+            p.classList.toggle("piece--hidden", !(okCat && okCanvas));
+          });
+        }
+
+        catBtns.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            state.cat = btn.getAttribute("data-cat-filter");
+            catBtns.forEach(function (b) {
+              b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+            });
+            apply();
+          });
+        });
+
+        canvasBtns.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var val = btn.getAttribute("data-canvas-filter");
+            var already = btn.getAttribute("aria-pressed") === "true";
+            canvasBtns.forEach(function (b) {
+              b.setAttribute("aria-pressed", "false");
+            });
+            state.canvas = already ? "any" : val;
+            if (!already) btn.setAttribute("aria-pressed", "true");
+            apply();
+          });
+        });
+
+        var form = document.querySelector("[data-signup-form]");
+        var note = document.querySelector("[data-form-note]");
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var input = form.querySelector("input[type=email]");
+            var ok = input && input.value && input.value.indexOf("@") > 0;
+            if (note) {
+              note.textContent = ok
+                ? "Noted. We will write when Edition 02 opens."
+                : "An email address is needed first.";
+              note.setAttribute("data-form-status", ok ? "ok" : "error");
+            }
+            if (ok && input) input.value = "";
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

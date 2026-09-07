@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sinगली</title>
+    <title>The Hands. Sinगली</title>
     <meta
       name="description"
-      content="Sinगली. Pieces made in small numbered drops by makers named on the tag."
+      content="The Hands. Sinगली. Pieces made in small numbered drops by makers named on the tag."
     />
     <meta name="theme-color" content="#F4F1EC" />
 
@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="assets/css/tokens.css" />
     <link rel="stylesheet" href="assets/css/base.css" />
     <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/pages.css" />
 
     <!--
       Runs before first paint. Marks that scripting is present, so nothing
@@ -66,7 +67,6 @@
     <!-- M12. Present at load, lifted once fonts are ready. -->
     <div class="transition" data-transition aria-hidden="true"></div>
 
-    <!-- partials/header.html -->
     <header class="header" data-header>
       <div class="container header__inner">
         <a class="header__brand wordmark" href="index.html" aria-label="Sinगली, home">Sin<span>गली</span></a>
@@ -84,7 +84,7 @@
         <nav class="nav" id="sin-nav" data-nav aria-label="Primary">
           <ul class="nav__list">
             <li><a class="nav__link" href="drop.html">The Drop</a></li>
-            <li><a class="nav__link" href="artisans.html">The Hands</a></li>
+            <li><a class="nav__link" href="artisans.html" aria-current="page">The Hands</a></li>
             <li><a class="nav__link" href="house.html">The House</a></li>
             <li><a class="nav__link" href="journal.html">Journal</a></li>
           </ul>
@@ -98,12 +98,86 @@
       <span class="shirorekha header__rule" aria-hidden="true"></span>
     </header>
 
-    <!-- Page sections go here. Keep the page class so content clears the
-         fixed header, or drop it when the first section is a full bleed
-         hero that the header is meant to sit over. -->
-    <main id="main" class="page section"></main>
+    <main id="main" class="page">
+      <section class="section">
+        <div class="container lede">
+          <h1 class="lede__title t-hero" data-reveal="lines">The Hands.</h1>
+          <p class="lede__mono">The Search</p>
+          <p class="t-body measure" data-reveal>
+            We look for makers who are very good and not yet found. This page fills as the search does.
+          </p>
+        </div>
+      </section>
 
-    <!-- partials/footer.html -->
+      <span class="shirorekha" data-draw aria-hidden="true"></span>
+
+      <div class="chapter">
+        <div class="container chapter__inner">
+          <div class="chapter__label">
+            <span class="shirorekha" data-draw aria-hidden="true"></span>
+            Edition 01
+          </div>
+          <div class="chapter__body maker">
+            <span class="maker__media media" data-reveal>
+              <img src="assets/img/artisan-portrait-01.svg" alt="Bone-toned woven texture, placeholder ground for a maker portrait not yet photographed." />
+            </span>
+            <div>
+              <p class="maker__credit t-mono">Sinगली × MATS</p>
+              <p class="maker__facts">
+                <span>Embroidery</span>
+                <span>Hyderabad</span>
+              </p>
+              <p class="t-body measure" data-reveal>
+                This hand has worked embroidery in Hyderabad for years, mostly unnamed on the pieces it finished. Edition 01 is stitched entirely by this one hand, ten pieces, numbered, then gone.
+              </p>
+              <p class="t-body measure" data-reveal>
+                A salary first. Then a share of what they made. The tag is where credit becomes physical.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <span class="shirorekha chapter__divider" data-draw aria-hidden="true"></span>
+      </div>
+
+      <div class="chapter">
+        <div class="container chapter__inner">
+          <div class="chapter__label">
+            <span class="shirorekha" data-draw aria-hidden="true"></span>
+            Edition 02
+          </div>
+          <div class="chapter__body">
+            <p class="t-body measure" data-reveal>In search. Nobody found yet, so nobody is named here.</p>
+
+            <div class="pending-grid">
+              <div class="pending">
+                <span class="pending__media media media--pending">
+                  <img src="assets/img/artisan-portrait-02.svg" alt="Bone-toned woven texture, placeholder curtain held down until a maker is found." />
+                </span>
+                <p class="pending__caption">Edition 02. In search.</p>
+              </div>
+
+              <div class="pending">
+                <span class="pending__media media media--pending">
+                  <img src="assets/img/artisan-portrait-03.svg" alt="Bone-toned woven texture, placeholder curtain held down until a maker is found." />
+                </span>
+                <p class="pending__caption">Edition 02. In search.</p>
+              </div>
+
+              <div class="pending">
+                <span class="pending__media media media--pending">
+                  <img src="assets/img/artisan-portrait-04.svg" alt="Bone-toned woven texture, placeholder curtain held down until a maker is found." />
+                </span>
+                <p class="pending__caption">Edition 02. In search.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
     <footer class="footer" data-theme="dark" data-footer>
       <div class="container">
         <span class="shirorekha shirorekha--footer footer__rule" data-draw aria-hidden="true"></span>

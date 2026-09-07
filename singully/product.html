@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Thread Overshirt. Sinगली</title>
+    <meta
+      name="description"
+      content="The Piece. Sinगली. Pieces made in small numbered drops by makers named on the tag."
+    />
+    <meta name="theme-color" content="#F4F1EC" />
+
+    <!-- The शिरोरेखा, at 32px. Inline so the page never asks for a file. -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F4F1EC'/%3E%3Crect x='5' y='12' width='22' height='2.5' fill='%232E2C2A'/%3E%3C/svg%3E" />
+
+    <!-- One font request. Rozha One display, Mukta body, IBM Plex Mono credits. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Mukta:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    />
+
+    <link rel="stylesheet" href="assets/css/tokens.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/pages.css" />
+
+    <!--
+      Runs before first paint. Marks that scripting is present, so nothing
+      starts hidden on a page that cannot animate, and decides whether this
+      visit gets the preloader at all.
+    -->
+    <script>
+      (function (d, w) {
+        var h = d.documentElement;
+        h.classList.add("js");
+        var skip = false;
+        try {
+          skip = w.sessionStorage.getItem("sin_seen") === "1";
+        } catch (e) {
+          skip = false;
+        }
+        if (
+          w.matchMedia &&
+          w.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ) {
+          skip = true;
+        }
+        if (skip) h.classList.add("sin-skip-intro");
+      })(document, window);
+    </script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- M1. The शिरोरेखा draws, the wordmark drops from it, both rise into
+         the header. Removed from the document when the sequence ends. -->
+    <div class="preloader" data-preloader aria-hidden="true">
+      <div class="preloader__stage">
+        <span class="preloader__rule"></span>
+        <span class="preloader__mark wordmark">Sin<span>गली</span></span>
+      </div>
+    </div>
+
+    <!-- M12. Present at load, lifted once fonts are ready. -->
+    <div class="transition" data-transition aria-hidden="true"></div>
+
+    <header class="header" data-header>
+      <div class="container header__inner">
+        <a class="header__brand wordmark" href="index.html" aria-label="Sinगली, home">Sin<span>गली</span></a>
+
+        <button
+          class="nav__toggle"
+          type="button"
+          data-nav-toggle
+          aria-controls="sin-nav"
+          aria-expanded="false"
+        >
+          <span data-nav-toggle-label>Menu</span>
+        </button>
+
+        <nav class="nav" id="sin-nav" data-nav aria-label="Primary">
+          <ul class="nav__list">
+            <li><a class="nav__link" href="drop.html">The Drop</a></li>
+            <li><a class="nav__link" href="artisans.html">The Hands</a></li>
+            <li><a class="nav__link" href="house.html">The House</a></li>
+            <li><a class="nav__link" href="journal.html">Journal</a></li>
+          </ul>
+        </nav>
+
+        <button class="header__bag" type="button" data-bag-label data-cursor="open">
+          Bag (<span data-bag-count>0</span>)
+        </button>
+      </div>
+
+      <span class="shirorekha header__rule" aria-hidden="true"></span>
+    </header>
+
+    <main id="main" class="page">
+      <section class="section">
+        <div class="container">
+          <div class="pdp">
+            <div class="pdp__gallery">
+              <div
+                class="hold"
+                data-hold
+                tabindex="0"
+                role="button"
+                aria-pressed="false"
+                data-hold-label="Hold to see the hands"
+                data-hold-credit="Sinगली × MATS, 3/10"
+                data-cursor="hold"
+              >
+                <div class="hold__frame">
+                  <div class="hold__back">
+                    <div class="media">
+                      <img src="assets/img/hands-01.svg" alt="Sand-toned block print grid texture, placeholder for the making process." />
+                    </div>
+                  </div>
+                  <div class="hold__front">
+                    <div class="media">
+                      <img src="assets/img/piece-03.svg" alt="Indigo denim twill texture, placeholder for the finished piece photograph." />
+                    </div>
+                  </div>
+                </div>
+                <div class="hold__label">
+                  <span class="hold__label-text">Hold to see the hands</span>
+                  <span class="hold__progress" aria-hidden="true">0%</span>
+                </div>
+              </div>
+
+              <div class="pdp__thumbs">
+                <span class="media" data-reveal>
+                  <img src="assets/img/piece-05.svg" alt="Bone-toned woven fabric texture, second placeholder angle of the piece." />
+                </span>
+                <span class="media" data-reveal>
+                  <img src="assets/img/piece-06.svg" alt="Indigo denim twill texture, third placeholder angle of the piece." />
+                </span>
+              </div>
+            </div>
+
+            <div class="pdp__details">
+              <p class="pdp__eyebrow t-mono">Piece 3 of 10</p>
+              <h1 class="t-1" data-reveal="lines">Thread Overshirt.</h1>
+              <p class="pdp__credit t-mono">Sinगली × MATS, 3/10</p>
+              <p class="pdp__price t-2">₹3,800</p>
+
+              <div class="size-row" role="group" aria-label="Size">
+                <button class="size-btn" type="button" data-size="XS" aria-pressed="false">XS</button>
+                <button class="size-btn" type="button" data-size="S" aria-pressed="false">S</button>
+                <button class="size-btn" type="button" data-size="M" aria-pressed="false">M</button>
+                <button class="size-btn" type="button" data-size="L" aria-pressed="false">L</button>
+                <button class="size-btn" type="button" data-size="XL" aria-pressed="false">XL</button>
+              </div>
+
+              <div class="pdp__cta">
+                <button class="btn btn--primary btn--block" type="button" data-add-to-bag>Add to bag</button>
+                <p class="pdp__note" data-add-note aria-live="polite"></p>
+              </div>
+
+              <div class="acc-group">
+                <details class="acc">
+                  <summary class="acc__summary">
+                    <span>The piece</span>
+                    <span class="acc__mark" aria-hidden="true"></span>
+                  </summary>
+                  <div class="acc__panel measure stack">
+                    <p>A plain cotton shirt is the canvas. Heavy hand embroidery, worked over three days, is the rest.</p>
+                    <p>No two pieces in this run carry the same density of stitch. Roughly thirty percent of a piece is the canvas. Seventy percent is the soul.</p>
+                  </div>
+                </details>
+
+                <details class="acc">
+                  <summary class="acc__summary">
+                    <span>The hands</span>
+                    <span class="acc__mark" aria-hidden="true"></span>
+                  </summary>
+                  <div class="acc__panel measure stack">
+                    <p>This piece is one of ten made by a single hand for Edition 01. A salary first. Then a share of what they made.</p>
+                    <p>The maker is not our labour. The maker is our co-creator.</p>
+                  </div>
+                </details>
+
+                <details class="acc">
+                  <summary class="acc__summary">
+                    <span>The tag</span>
+                    <span class="acc__mark" aria-hidden="true"></span>
+                  </summary>
+                  <div class="acc__panel measure stack">
+                    <p>Every piece carries a woven tag: the maker's mark, the piece number, and Sinगली. No price. No size. Just credit.</p>
+                    <p>The tag is not packaging. It is part of the piece.</p>
+                  </div>
+                </details>
+
+                <details class="acc">
+                  <summary class="acc__summary">
+                    <span>Care</span>
+                    <span class="acc__mark" aria-hidden="true"></span>
+                  </summary>
+                  <div class="acc__panel measure stack">
+                    <p>Hand wash in cold water. Dry flat, out of direct sun. Iron on the reverse, over a cloth, away from the stitch.</p>
+                  </div>
+                </details>
+
+                <details class="acc">
+                  <summary class="acc__summary">
+                    <span>Shipping and returns</span>
+                    <span class="acc__mark" aria-hidden="true"></span>
+                  </summary>
+                  <div class="acc__panel measure stack">
+                    <p>Ships from Hyderabad within five working days of an order.</p>
+                    <p>If the size is wrong, write to hello@singully.com within seven days of delivery and we will sort it out. A run that closes does not reopen, so an exchange draws from the same ten pieces while any remain unclaimed.</p>
+                  </div>
+                </details>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <span class="shirorekha" data-draw aria-hidden="true"></span>
+
+      <section class="section">
+        <div class="container same-hand">
+          <p class="t-2" data-reveal>From the same hand.</p>
+          <div class="piece-grid">
+            <a class="piece" href="drop.html" data-cursor="enter">
+              <span class="piece__media media" data-reveal>
+                <img src="assets/img/piece-01.svg" alt="Ink-toned twill fabric texture, placeholder for the finished piece photograph." />
+              </span>
+              <span class="piece__name t-3">Denim, Second Life 01</span>
+              <span class="piece__credit t-mono">Sinगली × MATS, 1/10</span>
+              <span class="piece__price t-3">₹4,200</span>
+              <span class="piece__edition t-mono">Piece 1 of 10</span>
+            </a>
+
+            <a class="piece" href="drop.html" data-cursor="enter">
+              <span class="piece__media media" data-reveal>
+                <img src="assets/img/piece-02.svg" alt="Bone-toned woven fabric texture, placeholder for the finished piece photograph." />
+              </span>
+              <span class="piece__name t-3">Carpet Coat</span>
+              <span class="piece__credit t-mono">Sinगली × MATS, 2/10</span>
+              <span class="piece__price t-3">₹5,000</span>
+              <span class="piece__edition t-mono">Piece 2 of 10</span>
+            </a>
+
+            <a class="piece" href="drop.html" data-cursor="enter">
+              <span class="piece__media media" data-reveal>
+                <img src="assets/img/piece-04.svg" alt="Ink-toned twill fabric texture, placeholder for the finished piece photograph." />
+              </span>
+              <span class="piece__name t-3">Tattooed Loafer</span>
+              <span class="piece__credit t-mono">Sinगली × MATS, 4/10</span>
+              <span class="piece__price t-3">₹4,600</span>
+              <span class="piece__edition t-mono">Piece 4 of 10</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" data-theme="dark" data-footer>
+      <div class="container">
+        <span class="shirorekha shirorekha--footer footer__rule" data-draw aria-hidden="true"></span>
+
+        <div class="footer__wordmark">
+          <span class="wordmark">Sin<span>गली</span></span>
+        </div>
+
+        <div class="footer__cols">
+          <div class="footer__col">
+            <h2 class="footer__col-title">House</h2>
+            <ul>
+              <li><a href="drop.html">The Drop</a></li>
+              <li><a href="artisans.html">The Hands</a></li>
+              <li><a href="house.html">The House</a></li>
+              <li><a href="journal.html">Journal</a></li>
+              <li><a href="folk.html">गली Folk</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h2 class="footer__col-title">Help</h2>
+            <ul>
+              <li><a href="help.html#sizing">Sizing</a></li>
+              <li><a href="help.html#shipping">Shipping and returns</a></li>
+              <li><a href="help.html#care">Care</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h2 class="footer__col-title">Legal</h2>
+            <ul>
+              <li><a href="legal.html#privacy">Privacy</a></li>
+              <li><a href="legal.html#terms">Terms</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__col">
+            <h2 class="footer__col-title">Write</h2>
+            <ul>
+              <li><a href="mailto:hello@singully.com">hello@singully.com</a></li>
+              <li>
+                <a href="https://www.instagram.com/singully.official/" rel="me noopener" target="_blank">
+                  Instagram @singully.official
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer__legal">
+          <span>House of Singully Private Limited, Hyderabad</span>
+          <span>&copy; <span data-year>2026</span></span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Order matters. GSAP, then the plugin, then Lenis, then ours. -->
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/vendor/ScrollTrigger.min.js"></script>
+    <script src="assets/vendor/lenis.min.js"></script>
+    <script src="assets/js/motion.js"></script>
+    <script src="assets/js/site.js"></script>
+
+    <!-- Page behaviour local to product.html: the size row and the bag
+         note. Nothing here touches assets/js. -->
+    <script>
+      (function () {
+        var sizeBtns = Array.prototype.slice.call(document.querySelectorAll("[data-size]"));
+        var selected = null;
+
+        sizeBtns.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            selected = btn.getAttribute("data-size");
+            sizeBtns.forEach(function (b) {
+              b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+            });
+          });
+        });
+
+        var addBtn = document.querySelector("[data-add-to-bag]");
+        var note = document.querySelector("[data-add-note]");
+
+        if (addBtn) {
+          addBtn.addEventListener("click", function () {
+            if (!selected) {
+              if (note) note.textContent = "Choose a size first.";
+              return;
+            }
+            if (note) note.textContent = "Added, size " + selected + ".";
+            if (window.SinSite && window.SinSite.setBagCount) {
+              var current = 0;
+              try {
+                current = parseInt(window.localStorage.getItem("sin_bag_count"), 10) || 0;
+              } catch (err) {
+                current = 0;
+              }
+              window.SinSite.setBagCount(current + 1);
+            }
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

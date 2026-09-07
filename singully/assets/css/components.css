@@ -397,6 +397,8 @@
 
 .hold__label-text {
   min-height: 1.4em;
+  /* Script swaps this line for the credit, which carries the wordmark. */
+  text-transform: none;
 }
 
 .hold__progress {
@@ -529,6 +531,11 @@
   letter-spacing: var(--tr-mono);
   text-transform: uppercase;
   color: var(--figure-2);
+}
+
+/* The credit carries the wordmark, so it is set as written. */
+.piece__credit {
+  text-transform: none;
 }
 
 .piece__edition {
@@ -986,4 +993,742 @@ html.js:not(.sin-skip-intro) .preloader {
 .pin-spacer,
 .pin {
   min-width: 0;
+}
+
+/* ==========================================================================
+   Picture element inside a media frame
+   The frame already scales its child for parallax. A nested img must not
+   scale a second time.
+   ========================================================================== */
+
+.media picture img {
+  transform: none;
+}
+
+/* ==========================================================================
+   Hero reveal state
+   The hero runs its own timeline after the preloader, so its supporting
+   blocks start hidden only when scripting is present.
+   ========================================================================== */
+
+html.js [data-hero-reveal] {
+  opacity: 0;
+}
+
+/* A line written into the markup rather than found by the splitter. */
+[data-line] {
+  display: block;
+}
+
+/* The name is never romanised and never recased, so it opts out of the
+   uppercase that mono lines otherwise carry. */
+.nocaps {
+  text-transform: none;
+}
+
+html.motion-off [data-hero-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-hero-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   Home. Hero
+   Headline runs the full twelve columns. The supporting block is indented
+   to columns 2 to 6 and the media takes 7 to 12.
+   ========================================================================== */
+
+.hero {
+  padding-top: var(--s-6);
+  padding-bottom: var(--section-y);
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  gap: var(--s-5) var(--gutter);
+  align-items: end;
+}
+
+.hero__head {
+  grid-column: 1 / -1;
+}
+
+.hero__headline {
+  /* Three written lines. The splitter masks each one it finds. The scale
+     is held under the hero token so the longest of the three still sets on
+     one line at 1440. */
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 8.6vw, 7rem);
+  line-height: var(--lh-hero);
+  letter-spacing: var(--tr-hero);
+}
+
+.hero__text,
+.hero__figure {
+  grid-column: 1 / -1;
+}
+
+.hero__sub {
+  max-width: var(--measure);
+  margin-bottom: var(--s-5);
+  color: var(--figure-2);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-3) var(--s-6);
+}
+
+.hero__figure .media {
+  --media-ratio: 4 / 5;
+}
+
+@media (min-width: 720px) {
+  .hero__text {
+    grid-column: 1 / span 6;
+  }
+
+  .hero__figure {
+    grid-column: 7 / -1;
+  }
+
+  .hero__figure .media {
+    --media-ratio: 3 / 2;
+  }
+}
+
+@media (min-width: 1080px) {
+  .hero__text {
+    grid-column: 2 / span 5;
+    padding-bottom: var(--s-2);
+  }
+
+  .hero__figure {
+    grid-column: 7 / -1;
+  }
+
+  /* Wide crop from here up, so the headline, the block under it and the
+     media all stand inside the first screen. */
+  .hero__figure .media {
+    --media-ratio: 16 / 9;
+  }
+}
+
+/* ==========================================================================
+   Prologue
+   Pinned for three screens. Four lines ink in one at a time over a cloth
+   backdrop held at eight percent.
+   ========================================================================== */
+
+.prologue {
+  position: relative;
+  overflow: hidden;
+}
+
+.prologue__pin {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  padding-block: var(--s-7);
+}
+
+.prologue__cloth {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.prologue__cloth img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.prologue__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  gap: var(--s-5) var(--gutter);
+}
+
+.prologue__label {
+  grid-column: 1 / -1;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  line-height: var(--lh-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-2);
+}
+
+.prologue__label .shirorekha {
+  margin-bottom: var(--s-2);
+  color: var(--figure);
+}
+
+.prologue__lines {
+  grid-column: 1 / -1;
+}
+
+.prologue__line {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--t-2);
+  line-height: var(--lh-2);
+  letter-spacing: var(--tr-2);
+}
+
+/* The line rests dim and inks in on scroll, but only where the scroll
+   sequence can actually run. */
+html.js .prologue__line {
+  opacity: 0.15;
+}
+
+html.motion-off .prologue__line {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prologue__line {
+    opacity: 1 !important;
+  }
+}
+
+.prologue__line + .prologue__line {
+  margin-top: var(--s-4);
+}
+
+@media (min-width: 1080px) {
+  .prologue__label {
+    grid-column: 1 / span 2;
+  }
+
+  .prologue__lines {
+    grid-column: 3 / span 8;
+  }
+}
+
+/* ==========================================================================
+   Chapter head and columns
+   A drawn line, a sticky mono number in the left margin, and ten columns
+   of content beside it that stay in step with the page grid.
+   ========================================================================== */
+
+.chapter__rule {
+  margin-bottom: var(--s-4);
+  color: var(--figure);
+}
+
+.chapter__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  gap: var(--s-5) var(--gutter);
+}
+
+.chapter__tag {
+  grid-column: 1 / -1;
+  align-self: start;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  line-height: var(--lh-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-2);
+}
+
+.chapter__main {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: var(--s-6) var(--gutter);
+}
+
+.chapter__main > * {
+  grid-column: 1 / -1;
+}
+
+.chapter__full {
+  margin-top: var(--s-6);
+}
+
+@media (min-width: 1080px) {
+  .chapter__tag {
+    grid-column: 1 / span 2;
+    position: sticky;
+    top: calc(var(--header-h) + var(--s-4));
+    z-index: var(--z-sticky);
+  }
+
+  .chapter__main {
+    grid-column: 3 / -1;
+  }
+
+  .chapter__full {
+    margin-top: var(--s-7);
+  }
+}
+
+/* ==========================================================================
+   Chapter 01. The Hands
+   Text in the first four of the ten inner columns, the hold frames in the
+   last six.
+   ========================================================================== */
+
+.hands__intro {
+  margin-bottom: var(--s-4);
+}
+
+.hands__body {
+  max-width: var(--measure);
+  color: var(--figure-2);
+}
+
+.hands__holds {
+  display: grid;
+  gap: var(--s-6) var(--gutter);
+}
+
+.hold--desk {
+  display: none;
+}
+
+@media (min-width: 1080px) {
+  .chapter--hands .chapter__main {
+    align-items: start;
+  }
+
+  .hands__text {
+    grid-column: 1 / span 4;
+  }
+
+  .hands__holds {
+    grid-column: 5 / -1;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .hands__holds > .hold {
+    grid-column: 1 / -1;
+  }
+
+  .hands__holds > .hold--desk {
+    display: block;
+    grid-column: 3 / -1;
+  }
+}
+
+/* ==========================================================================
+   Chapter 02. The Canvas
+   The inversion. Text sits right, the lane row runs the full width under it.
+   ========================================================================== */
+
+@media (min-width: 1080px) {
+  .canvas__text {
+    grid-column: 6 / -1;
+  }
+}
+
+.canvas__intro {
+  margin-bottom: var(--s-4);
+}
+
+.canvas__sub {
+  max-width: var(--measure);
+  color: var(--figure-2);
+}
+
+.lane__body {
+  font-size: var(--t-small);
+  color: var(--figure-2);
+}
+
+.lane__link {
+  display: block;
+  color: inherit;
+}
+
+@media (min-width: 1080px) {
+  .lane__body {
+    opacity: 0;
+    transition: opacity var(--d-micro) var(--ease-out);
+  }
+
+  .lane.is-active .lane__body,
+  .lane:focus-within .lane__body {
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Chapter 03. The Drop
+   Pinned on desktop while the row of pieces scrubs sideways.
+   ========================================================================== */
+
+.drop {
+  overflow: hidden;
+}
+
+.drop__head {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  gap: var(--s-4) var(--gutter);
+  margin-bottom: var(--s-6);
+}
+
+.drop__tag,
+.drop__intro,
+.drop__mono {
+  grid-column: 1 / -1;
+}
+
+.drop__tag,
+.drop__mono {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  line-height: var(--lh-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-2);
+}
+
+.drop__end {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--s-3);
+  padding-top: var(--s-3);
+  border-top: var(--border);
+}
+
+.drop__end .btn {
+  align-self: flex-start;
+}
+
+@media (min-width: 1080px) {
+  .drop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    padding-block: var(--s-7);
+  }
+
+  .drop__tag {
+    grid-column: 1 / span 2;
+  }
+
+  .drop__intro {
+    grid-column: 3 / span 5;
+  }
+
+  .drop__mono {
+    grid-column: 9 / span 4;
+    align-self: end;
+  }
+
+  .drop__end {
+    flex: 0 0 clamp(200px, 16vw, 280px);
+  }
+}
+
+/* ==========================================================================
+   Chapter 04. The Tag
+   An anatomy diagram. Four lines draw out from the tag to mono labels.
+   ========================================================================== */
+
+.tag__art {
+  width: 100%;
+  color: var(--figure);
+}
+
+.tag__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.tag__svg--wide {
+  display: none;
+}
+
+.tag__svg--narrow {
+  display: block;
+}
+
+.tag__face {
+  fill: var(--ground-2);
+}
+
+.tag__stroke {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.tag__stitch {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+  stroke-dasharray: 6 6;
+}
+
+.tag__rule {
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.tag__wordmark {
+  font-family: var(--font-display);
+  font-size: 44px;
+  letter-spacing: -1.2px;
+  fill: currentColor;
+}
+
+.tag__mono {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  fill: currentColor;
+}
+
+.tag__line {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+}
+
+.tag__dot {
+  fill: currentColor;
+}
+
+.tag__label {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  fill: currentColor;
+}
+
+.tag__list {
+  display: grid;
+  gap: var(--s-3);
+  margin-top: var(--s-5);
+}
+
+.tag__list li {
+  padding-top: var(--s-2);
+  border-top: var(--border);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  line-height: var(--lh-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-2);
+}
+
+.tag__body-copy {
+  max-width: var(--measure);
+  color: var(--figure-2);
+}
+
+@media (min-width: 720px) {
+  .tag__svg--wide {
+    display: block;
+  }
+
+  .tag__svg--narrow {
+    display: none;
+  }
+
+  /* The labels are drawn in the diagram itself from here up. The list stays
+     in the document for anything that is not looking at it. */
+  .tag__list {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+.tag__art-wrap {
+  margin: 0;
+}
+
+@media (min-width: 1080px) {
+  .tag__intro {
+    grid-column: 1 / span 6;
+  }
+
+  .tag__text {
+    grid-column: 1 / span 4;
+  }
+
+  .tag__figure {
+    grid-column: 5 / -1;
+  }
+}
+
+/* ==========================================================================
+   गली Folk strip
+   Ink ground. The record, not a programme.
+   ========================================================================== */
+
+.folk {
+  background: var(--ground);
+  color: var(--figure);
+  padding-block: var(--section-y);
+}
+
+.folk__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  gap: var(--s-5) var(--gutter);
+  align-items: end;
+}
+
+.folk__line,
+.folk__text {
+  grid-column: 1 / -1;
+}
+
+.folk__body {
+  max-width: var(--measure);
+  margin-bottom: var(--s-5);
+  color: var(--figure-2);
+}
+
+.folk__count {
+  grid-column: 1 / -1;
+  padding-top: var(--s-3);
+  border-top: var(--border);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  line-height: var(--lh-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-2);
+}
+
+@media (min-width: 1080px) {
+  .folk__line {
+    grid-column: 1 / span 6;
+  }
+
+  .folk__text {
+    grid-column: 8 / -1;
+  }
+
+  .folk__count {
+    grid-column: 8 / -1;
+    margin-top: var(--s-5);
+  }
+}
+
+/* ==========================================================================
+   Journal strip
+   Three cards, each hanging from its own शिरोरेखा, stepped down the grid.
+   ========================================================================== */
+
+.notes__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  gap: var(--s-6) var(--gutter);
+}
+
+.note {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding-top: var(--s-3);
+  border-top: var(--border);
+}
+
+.note__media {
+  --media-ratio: 3 / 2;
+  margin-bottom: var(--s-2);
+}
+
+.note__meta {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  line-height: var(--lh-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-2);
+}
+
+.note__title {
+  font-family: var(--font-display);
+  font-size: var(--t-3);
+  line-height: var(--lh-3);
+}
+
+@media (min-width: 720px) {
+  .note {
+    grid-column: span 4;
+  }
+}
+
+@media (min-width: 1080px) {
+  .note:nth-child(2) {
+    margin-top: var(--s-5);
+  }
+
+  .note:nth-child(3) {
+    margin-top: var(--s-7);
+  }
+}
+
+/* ==========================================================================
+   Footer marquee spacing
+   ========================================================================== */
+
+.footer__marquee {
+  margin-bottom: var(--s-5);
+}
+
+/* The tag is drawn once into a hidden definition and used twice, so the
+   wide diagram and the close crop can never drift apart. */
+.tag__defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* The journal strip carries a label but no sticky column, so the shared
+   chapter label rule is stood down here. */
+.notes__tag {
+  position: static;
+  margin-bottom: var(--s-6);
+}
+
+/* The row that follows a full width plate keeps the chapter's own indent
+   without repeating its number. */
+.chapter__grid--tail {
+  margin-top: var(--s-6);
+}
+
+@media (min-width: 1080px) {
+  .chapter__grid--tail {
+    margin-top: var(--s-7);
+  }
 }

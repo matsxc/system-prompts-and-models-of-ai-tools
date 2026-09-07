@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sinगली</title>
+    <title>गली Folk. Sinगली</title>
     <meta
       name="description"
-      content="Sinगली. Pieces made in small numbered drops by makers named on the tag."
+      content="गली Folk. Sinगली. Pieces made in small numbered drops by makers named on the tag."
     />
     <meta name="theme-color" content="#F4F1EC" />
 
@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="assets/css/tokens.css" />
     <link rel="stylesheet" href="assets/css/base.css" />
     <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/pages.css" />
 
     <!--
       Runs before first paint. Marks that scripting is present, so nothing
@@ -66,7 +67,6 @@
     <!-- M12. Present at load, lifted once fonts are ready. -->
     <div class="transition" data-transition aria-hidden="true"></div>
 
-    <!-- partials/header.html -->
     <header class="header" data-header>
       <div class="container header__inner">
         <a class="header__brand wordmark" href="index.html" aria-label="Sinगली, home">Sin<span>गली</span></a>
@@ -98,12 +98,34 @@
       <span class="shirorekha header__rule" aria-hidden="true"></span>
     </header>
 
-    <!-- Page sections go here. Keep the page class so content clears the
-         fixed header, or drop it when the first section is a full bleed
-         hero that the header is meant to sit over. -->
-    <main id="main" class="page section"></main>
+    <main id="main" class="page">
+      <section class="section">
+        <div class="container lede">
+          <h1 class="lede__title t-hero" data-reveal="lines">गली Folk.</h1>
+          <p class="lede__mono">The founding record.</p>
+          <p class="t-body measure" data-reveal>
+            The first five hundred people to buy a piece get a permanent page on this site. A record, not a loyalty programme. Names, piece numbers, the year.
+          </p>
+        </div>
+      </section>
 
-    <!-- partials/footer.html -->
+      <span class="shirorekha" data-draw aria-hidden="true"></span>
+
+      <section class="section">
+        <div class="container">
+          <div class="folk-list" data-folk-list role="table" aria-label="Founding गली Folk record, places 001 to 500">
+            <p class="folk-list__loading">Loading the record.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <p class="t-2 measure" data-reveal>Come stand at the front of the lane.</p>
+        </div>
+      </section>
+    </main>
+
     <footer class="footer" data-theme="dark" data-footer>
       <div class="container">
         <span class="shirorekha shirorekha--footer footer__rule" data-draw aria-hidden="true"></span>
@@ -167,5 +189,28 @@
     <script src="assets/vendor/lenis.min.js"></script>
     <script src="assets/js/motion.js"></script>
     <script src="assets/js/site.js"></script>
+
+    <!-- Page behaviour local to folk.html: renders the 001 to 500 record.
+         Nothing here touches assets/js. Static markup, no animation. -->
+    <script>
+      (function () {
+        var root = document.querySelector("[data-folk-list]");
+        if (!root) return;
+
+        var rows = [];
+        for (var i = 1; i <= 500; i++) {
+          var n = String(i).padStart(3, "0");
+          var slot = i <= 10 ? '<span class="folk-row__slot" role="cell">Edition 01</span>' : "";
+          rows.push(
+            '<div class="folk-row" role="row"><span class="folk-row__n" role="cell">' +
+              n +
+              "</span>" +
+              slot +
+              "</div>"
+          );
+        }
+        root.innerHTML = rows.join("");
+      })();
+    </script>
   </body>
 </html>
