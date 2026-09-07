@@ -1,0 +1,592 @@
+/* ==========================================================================
+   Sinगली. Pages.
+   Styles for the secondary pages that the design system does not already
+   provide: drop.html, product.html, artisans.html, house.html, journal.html,
+   folk.html. Tokens only, no raw values. Loaded after components.css, on
+   these six pages only.
+   ========================================================================== */
+
+/* ---- Small heading rows used above a chapter or a band ------------------ */
+
+.lede {
+  padding-bottom: var(--s-6);
+}
+
+.lede__title {
+  margin-bottom: var(--s-3);
+}
+
+.lede__mono {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-2);
+}
+
+/* ==========================================================================
+   Filter row (drop.html)
+   ========================================================================== */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+  margin-bottom: var(--s-5);
+  padding-bottom: var(--s-4);
+  border-bottom: var(--border);
+}
+
+.filters__group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-3);
+}
+
+.filters__label {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-3);
+  margin-right: var(--s-1);
+}
+
+.filter-btn {
+  position: relative;
+  padding: var(--s-1) 0;
+  min-height: 32px;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-2);
+}
+
+.filter-btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--rule);
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--d-micro) var(--ease-out);
+}
+
+.filter-btn:hover,
+.filter-btn:focus-visible,
+.filter-btn[aria-pressed="true"] {
+  color: var(--figure);
+}
+
+.filter-btn:hover::after,
+.filter-btn:focus-visible::after,
+.filter-btn[aria-pressed="true"]::after {
+  transform: scaleX(1);
+}
+
+.piece--hidden {
+  display: none;
+}
+
+/* ==========================================================================
+   Piece grid (drop.html). Two up mobile, three up from 1080px.
+   ========================================================================== */
+
+.piece-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-4) var(--gutter);
+}
+
+@media (min-width: 1080px) {
+  .piece-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-6) var(--gutter);
+  }
+}
+
+/* ==========================================================================
+   Signup field (drop.html closing band)
+   ========================================================================== */
+
+.field-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--s-4);
+  padding-top: var(--s-4);
+  border-top: var(--border);
+}
+
+.field {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.field__label {
+  display: block;
+  margin-bottom: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-2);
+}
+
+.field__input {
+  display: block;
+  width: 100%;
+  padding: var(--s-2) 0;
+  border-bottom: var(--border);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  background: transparent;
+}
+
+.field__input::placeholder {
+  color: var(--figure-3);
+}
+
+.field__note {
+  margin-top: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  color: var(--figure-3);
+}
+
+.field__note[data-form-status="ok"] {
+  color: var(--figure);
+}
+
+/* ==========================================================================
+   Product page layout (product.html)
+   ========================================================================== */
+
+.pdp {
+  display: grid;
+  gap: var(--s-6) var(--gutter);
+}
+
+@media (min-width: 1080px) {
+  .pdp {
+    grid-template-columns: 7fr 5fr;
+    align-items: start;
+  }
+
+  .pdp__gallery {
+    position: sticky;
+    top: calc(var(--header-h) + var(--s-4));
+  }
+}
+
+.pdp__thumbs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-3);
+  margin-top: var(--s-3);
+}
+
+.pdp__eyebrow {
+  margin-bottom: var(--s-2);
+}
+
+.pdp__price {
+  margin-top: var(--s-2);
+}
+
+.pdp__edition {
+  margin-top: var(--s-1);
+}
+
+/* ---- Size row ------------------------------------------------------------ */
+
+.size-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-4);
+  padding-top: var(--s-4);
+  border-top: var(--border);
+}
+
+.size-btn {
+  min-width: 48px;
+  min-height: 44px;
+  padding-inline: var(--s-3);
+  border: var(--border);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure);
+  background: transparent;
+  transition: background var(--d-micro) var(--ease-out),
+    color var(--d-micro) var(--ease-out);
+}
+
+.size-btn[aria-pressed="true"] {
+  background: var(--figure);
+  color: var(--ground);
+}
+
+.size-btn:focus-visible {
+  outline: 1px solid var(--figure);
+  outline-offset: 2px;
+}
+
+.pdp__cta {
+  margin-top: var(--s-4);
+}
+
+.pdp__note {
+  margin-top: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  color: var(--figure-3);
+  min-height: 1.4em;
+}
+
+/* ==========================================================================
+   Accordion. Native details and summary styled to the system.
+   ========================================================================== */
+
+.acc-group {
+  margin-top: var(--s-5);
+  border-top: var(--border);
+}
+
+.acc {
+  border-bottom: var(--border);
+}
+
+.acc__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding-block: var(--s-3);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  cursor: pointer;
+  list-style: none;
+}
+
+.acc__summary::-webkit-details-marker {
+  display: none;
+}
+
+.acc__summary::marker {
+  content: "";
+}
+
+.acc__mark {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  color: var(--figure-2);
+}
+
+.acc__mark::before {
+  content: "+";
+}
+
+.acc[open] > .acc__summary .acc__mark::before {
+  content: "\2212";
+}
+
+.acc__panel {
+  padding-bottom: var(--s-4);
+  max-width: var(--measure);
+}
+
+.acc__panel > * + * {
+  margin-top: var(--s-3);
+}
+
+/* ==========================================================================
+   Same hand row heading (product.html)
+   ========================================================================== */
+
+.same-hand {
+  margin-top: var(--s-7);
+}
+
+/* ==========================================================================
+   House lists. Filters and rules, mono numbered.
+   ========================================================================== */
+
+.house-list {
+  display: grid;
+  gap: var(--s-5);
+  margin-top: var(--s-4);
+}
+
+@media (min-width: 720px) {
+  .house-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-5) var(--gutter);
+  }
+}
+
+.house-item {
+  padding-top: var(--s-3);
+  border-top: var(--border);
+}
+
+.house-item__n {
+  display: block;
+  margin-bottom: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  color: var(--figure-3);
+}
+
+.house-item__title {
+  margin-bottom: var(--s-1);
+  font-family: var(--font-display);
+  font-size: var(--t-3);
+  line-height: var(--lh-3);
+}
+
+.rule-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  margin-top: var(--s-4);
+}
+
+.rule-item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  padding-top: var(--s-3);
+  border-top: var(--border);
+  font-family: var(--font-display);
+  font-size: var(--t-3);
+  line-height: var(--lh-3);
+}
+
+.rule-item__n {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  color: var(--figure-3);
+}
+
+/* ==========================================================================
+   The tag diagram (house.html). A static anatomy drawing, no money figures.
+   ========================================================================== */
+
+.tag-diagram {
+  display: grid;
+  gap: var(--s-5) var(--gutter);
+  align-items: center;
+}
+
+@media (min-width: 1080px) {
+  .tag-diagram {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+
+.tag-diagram__art {
+  width: 100%;
+  height: auto;
+  color: var(--figure);
+}
+
+.tag-diagram__callouts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+.tag-diagram__callout {
+  padding-top: var(--s-2);
+  border-top: var(--border);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-2);
+}
+
+/* ==========================================================================
+   Artisan blocks (artisans.html)
+   ========================================================================== */
+
+.maker {
+  display: grid;
+  gap: var(--s-4) var(--gutter);
+}
+
+@media (min-width: 1080px) {
+  .maker {
+    grid-template-columns: 5fr 7fr;
+    align-items: start;
+  }
+}
+
+.maker__media {
+  --media-ratio: 4 / 5;
+}
+
+.maker__credit {
+  margin-bottom: var(--s-2);
+}
+
+.maker__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-4);
+  margin-bottom: var(--s-4);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-2);
+}
+
+.pending-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: var(--s-5) var(--gutter);
+  margin-top: var(--s-5);
+}
+
+@media (min-width: 720px) {
+  .pending-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.pending {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.pending__media {
+  --media-ratio: 4 / 5;
+}
+
+/* The curtain is left down on purpose. These portraits are not revealed
+   because there is nobody to show yet. Overrides both the default open
+   state on media without data-reveal and any scroll triggered lift. */
+.media--pending {
+  --curtain-y: 0% !important;
+}
+
+.media--pending::after {
+  transform: translateY(0) !important;
+}
+
+.pending__caption {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-3);
+}
+
+/* ==========================================================================
+   Journal (journal.html)
+   ========================================================================== */
+
+.journal-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.journal-entry {
+  display: grid;
+  gap: var(--s-4) var(--gutter);
+  padding-block: var(--s-6);
+  border-top: var(--border);
+}
+
+.journal-list > .journal-entry:last-child {
+  border-bottom: var(--border);
+}
+
+@media (min-width: 1080px) {
+  .journal-entry {
+    grid-template-columns: 5fr 7fr;
+    align-items: start;
+  }
+}
+
+.journal-entry__media {
+  --media-ratio: 3 / 2;
+}
+
+.journal-entry__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  margin-bottom: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+  text-transform: uppercase;
+  color: var(--figure-3);
+}
+
+.journal-entry__title {
+  margin-bottom: var(--s-2);
+}
+
+.journal-entry__standfirst {
+  margin-bottom: var(--s-3);
+  color: var(--figure-2);
+}
+
+/* ==========================================================================
+   गली Folk record (folk.html)
+   ========================================================================== */
+
+.folk-list {
+  border-top: var(--border);
+}
+
+.folk-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-4);
+  padding-block: var(--s-2);
+  border-bottom: var(--border);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--tr-mono);
+}
+
+.folk-row__n {
+  flex: 0 0 4.5ch;
+  color: var(--figure-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.folk-row__slot {
+  flex: 1 1 auto;
+  color: var(--figure-3);
+  text-transform: uppercase;
+}
+
+.folk-row__tag {
+  flex: 0 0 auto;
+  color: var(--figure);
+  text-transform: uppercase;
+}
+
+.folk-list__loading {
+  padding-block: var(--s-4);
+  color: var(--figure-3);
+}
