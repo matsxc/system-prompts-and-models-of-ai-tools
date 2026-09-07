@@ -1158,6 +1158,11 @@
 
       function update() {
         var y = window.scrollY || window.pageYOffset || 0;
+        // Lenis emits scroll events on frames where the position has not
+        // moved. Those carry no direction, so they must not count as "up",
+        // otherwise the header flickers between hidden and shown on the way
+        // down. Anything under two pixels is treated as no movement.
+        if (Math.abs(y - last) < 2 && y >= threshold) return;
         var down = y > last;
         last = y;
 
@@ -1168,7 +1173,6 @@
           if (hidden) {
             hidden = false;
             header.classList.remove("is-hidden");
-            gsap.to(header, { yPercent: 0, duration: 0.4, ease: "power2.inOut" });
           }
           return;
         }
@@ -1176,11 +1180,9 @@
         if (down && !hidden) {
           hidden = true;
           header.classList.add("is-hidden");
-          gsap.to(header, { yPercent: -100, duration: 0.4, ease: "power2.inOut" });
         } else if (!down && hidden) {
           hidden = false;
           header.classList.remove("is-hidden");
-          gsap.to(header, { yPercent: 0, duration: 0.4, ease: "power2.inOut" });
         }
       }
 
@@ -1193,7 +1195,6 @@
       this.showHeader = function () {
         hidden = false;
         header.classList.remove("is-hidden");
-        gsap.to(header, { yPercent: 0, duration: 0.3, ease: "power2.inOut" });
       };
 
       return header;

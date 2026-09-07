@@ -294,13 +294,21 @@ async function run() {
           const step = Math.round(window.innerHeight * 0.4);
           const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
           const total = () => document.documentElement.scrollHeight;
+          // Lenis owns the scroll position while it is smoothing, so a native
+          // scrollTo can be undone a frame later. Go through Lenis when it is
+          // there, immediately, and fall back to the native call otherwise.
+          const go = (y) => {
+            const l = window.SinMotion && window.SinMotion.lenis;
+            if (l && typeof l.scrollTo === "function") l.scrollTo(y, { immediate: true, force: true });
+            else window.scrollTo(0, y);
+          };
           for (let y = 0; y < total(); y += step) {
-            window.scrollTo(0, y);
+            go(y);
             await sleep(70);
           }
-          window.scrollTo(0, total());
+          go(total());
           await sleep(400);
-          window.scrollTo(0, 0);
+          go(0);
           await sleep(500);
         });
 
@@ -314,7 +322,11 @@ async function run() {
           const vh = await tab.evaluate(() => window.innerHeight);
           let i = 0;
           for (let y = 0; y < total; y += Math.round(vh * 0.9)) {
-            await tab.evaluate((yy) => window.scrollTo(0, yy), y);
+            await tab.evaluate((yy) => {
+              const l = window.SinMotion && window.SinMotion.lenis;
+              if (l && typeof l.scrollTo === "function") l.scrollTo(yy, { immediate: true, force: true });
+              else window.scrollTo(0, yy);
+            }, y);
             await tab.waitForTimeout(650);
             await tab.screenshot({ path: join(QA, `${name}-${width}-f${String(i++).padStart(2, "0")}.png`) });
           }

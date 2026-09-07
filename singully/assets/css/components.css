@@ -59,8 +59,13 @@
   bottom: 0;
 }
 
+.header {
+  /* M10 toggles .is-hidden only. CSS owns the transform, so the class and
+     the visual state can never disagree. */
+  transition: transform 0.4s var(--ease-in-out, cubic-bezier(0.65, 0, 0.35, 1));
+}
+
 .header.is-hidden {
-  /* Applied by M10. GSAP owns the transform, this is the no-JS fallback. */
   transform: translateY(-100%);
 }
 
@@ -1301,6 +1306,15 @@ html.motion-off .prologue__line {
 }
 
 @media (min-width: 1080px) {
+  /* Frame B (below) shares this row on the outer chapter grid rather than
+     being auto-placed after it, which is only possible if the tag and
+     chapter__main claim row 1 explicitly too: auto-placed siblings would
+     otherwise dodge frame B's cells and get pushed to row 2 themselves. */
+  .chapter--hands .chapter__tag,
+  .chapter--hands .chapter__main {
+    grid-row: 1;
+  }
+
   .chapter--hands .chapter__main {
     align-items: start;
   }
@@ -1318,9 +1332,32 @@ html.motion-off .prologue__line {
     grid-column: 1 / -1;
   }
 
-  .hands__holds > .hold--desk {
+  /* Frame B sits outside .chapter__main, a sibling grid item sharing frame
+     A's row on the chapter's own twelve columns, at 2/6, the same slot the
+     hero gives its supporting text. It sits at the bottom of the row frame
+     A occupies, then rides up from that flush-bottom position so the pair
+     reads as staggered rather than shelved. hands__text is short and top
+     aligned, leaving a void under it the width of a full 60%-of-frame-A box
+     does not clear once it rides up, so this is sized down from that brief
+     to the width that does: at a 4:5 ratio a box this wide is a quarter
+     again as tall, and 18% of that height is what the margin reads
+     against, in percent of this area's width. */
+  .hold--desk {
     display: block;
-    grid-column: 3 / -1;
+    grid-row: 1;
+    grid-column: 2 / span 5;
+    align-self: end;
+    width: 56%;
+    /* Clears the sticky chapter label, which is a little wider than column 1. */
+    margin-left: var(--s-4);
+    /* Hangs below the foot of frame A by about a third of its own height,
+       into the chapter's bottom rhythm, so the two frames read as a
+       staggered pair rather than a large one and a thumbnail. */
+    margin-bottom: -26%;
+  }
+
+  .chapter--hands {
+    padding-bottom: calc(var(--s-8) + 4vw);
   }
 }
 

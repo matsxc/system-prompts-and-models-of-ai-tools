@@ -553,15 +553,39 @@
    गली Folk record (folk.html)
    ========================================================================== */
 
+/* Five hundred rows still adds up even as a grid, so the section around it
+   keeps a tighter rhythm than the standard section padding. */
+.folk-list-section {
+  padding-block: var(--s-5);
+}
+
+/* A grid, not five hundred stacked rows: 2 columns below 720px, 3 from
+   720px, 5 from 1080px. Each cell is the mono number with a hairline
+   underneath; the first ten carry the edition label as a second line. */
 .folk-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 var(--s-4);
   border-top: var(--border);
+}
+
+@media (min-width: 720px) {
+  .folk-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1080px) {
+  .folk-list {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
 }
 
 .folk-row {
   display: flex;
-  align-items: baseline;
-  gap: var(--s-4);
-  padding-block: var(--s-2);
+  flex-direction: column;
+  gap: var(--s-1);
+  padding-block: var(--s-1);
   border-bottom: var(--border);
   font-family: var(--font-mono);
   font-size: var(--t-mono);
@@ -569,13 +593,11 @@
 }
 
 .folk-row__n {
-  flex: 0 0 4.5ch;
   color: var(--figure-2);
   font-variant-numeric: tabular-nums;
 }
 
 .folk-row__slot {
-  flex: 1 1 auto;
   color: var(--figure-3);
   text-transform: uppercase;
 }
